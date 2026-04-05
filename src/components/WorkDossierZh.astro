@@ -1,0 +1,176 @@
+---
+import type { Project } from "../data/projects-zh";
+import WorkflowDiagram from "./WorkflowDiagram.astro";
+import YTPipelineDiagram from "./YTPipelineDiagram.astro";
+import GeoBwsDiagram from "./GeoBwsDiagram.astro";
+
+type Props = {
+  projects: Project[];
+};
+
+const { projects } = Astro.props;
+---
+
+<section class="section work-section" aria-labelledby="work-heading">
+  <div class="work-shell">
+    <aside class="work-index" aria-labelledby="work-heading">
+      <p class="eyebrow work-index-label">索引 // 精选作品</p>
+      <h2 id="work-heading">一小套体现我思考方式的系统。</h2>
+
+      <div class="work-index-list" role="tablist" aria-label="精选作品">
+        {
+          projects.map((project, index) => (
+            <button
+              class={`work-index-item ${index === 0 ? "is-active" : ""}`}
+              type="button"
+              role="tab"
+              aria-selected={index === 0 ? "true" : "false"}
+              data-project-tab
+              data-project-id={project.id}
+            >
+              <span class="work-index-number">[{String(index + 1).padStart(2, "0")}]</span>
+              <span class="work-index-copy">
+                <strong>{project.title}</strong>
+                <span>{project.summary}</span>
+              </span>
+            </button>
+          ))
+        }
+      </div>
+    </aside>
+
+    <div class="dossier-stack">
+      {
+        projects.map((project, index) => (
+          <article
+            class={`dossier-panel ${index === 0 ? "is-active" : ""}`}
+            data-project-panel
+            data-project-id={project.id}
+            hidden={index === 0 ? undefined : true}
+          >
+            <div class="dossier-header">
+              <p class="eyebrow">项目档案</p>
+              <h3>{project.title}</h3>
+              <ul class="tag-list" aria-label={`${project.title} 标签`}>
+                {project.tags.map((tag) => (
+                  <li>{tag}</li>
+                ))}
+              </ul>
+            </div>
+
+            {project.hasDiagram && (
+              <>
+                <div class="workflow-diagram-wrapper" tabindex="0" role="button" aria-label="放大图表" data-project-id={project.id}>
+                  {project.id === "clawd-media-track" && <WorkflowDiagram />}
+                  {project.id === "private-enterprise-workflow" && <YTPipelineDiagram />}
+                  {project.id === "private-content-pipeline" && <GeoBwsDiagram />}
+                  <span class="diagram-hint">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
+                  点击放大
+                </span>
+                </div>
+                <dialog id={`diagram-modal-${project.id}`} class="diagram-modal" aria-labelledby={project.id === "clawd-media-track" ? "workflow-title" : project.id === "private-enterprise-workflow" ? "yt-title" : "geo-title"}>
+                  <form method="dialog">
+                    <button class="modal-close">&times; 关闭</button>
+                  </form>
+                  <div class="modal-content">
+                    {project.id === "clawd-media-track" && <WorkflowDiagram />}
+                    {project.id === "private-enterprise-workflow" && <YTPipelineDiagram />}
+                    {project.id === "private-content-pipeline" && <GeoBwsDiagram />}
+                  </div>
+                </dialog>
+              </>
+            )}
+
+            <div class="dossier-grid dossier-grid-single">
+              <section class="dossier-cell">
+                <p class="dossier-label">它是什么</p>
+                <p>{project.whatItIs}</p>
+              </section>
+
+              <section class="dossier-cell">
+                <p class="dossier-label">输入与输出</p>
+                <p>{project.inputsOutputs}</p>
+              </section>
+
+              <section class="dossier-cell">
+                <p class="dossier-label">难点在哪</p>
+                <p>{project.whatMadeItHard}</p>
+              </section>
+
+              <section class="dossier-cell">
+                <p class="dossier-label">我的决策</p>
+                <p>{project.whatIDecided}</p>
+              </section>
+
+              <section class="dossier-cell dossier-cell-wide">
+                <p class="dossier-label">带来的改变</p>
+                <p>{project.whatChanged}</p>
+
+                {
+                  project.link && (
+                    <p class="project-link-row">
+                      <a href={project.link} target="_blank" rel="noreferrer">
+                        查看仓库
+                      </a>
+                    </p>
+                  )
+                }
+              </section>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  const tabs = Array.from(document.querySelectorAll("[data-project-tab]"));
+  const panels = Array.from(document.querySelectorAll("[data-project-panel]"));
+
+  const activateProject = (projectId) => {
+    tabs.forEach((tab) => {
+      const active = tab.dataset.projectId === projectId;
+      tab.classList.toggle("is-active", active);
+      tab.setAttribute("aria-selected", active ? "true" : "false");
+    });
+
+    panels.forEach((panel) => {
+      const active = panel.dataset.projectId === projectId;
+      panel.classList.toggle("is-active", active);
+      panel.hidden = !active;
+    });
+  };
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      activateProject(tab.dataset.projectId);
+    });
+  });
+
+  document.querySelectorAll(".workflow-diagram-wrapper").forEach((wrapper) => {
+    wrapper.addEventListener("click", () => {
+      const modal = document.getElementById(`diagram-modal-${wrapper.dataset.projectId}`);
+      if (modal) modal.showModal();
+    });
+
+    wrapper.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        wrapper.click();
+      }
+    });
+  });
+
+  document.querySelectorAll(".diagram-modal").forEach((dialog) => {
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) {
+        dialog.close();
+      }
+    });
+  });
+</script>

@@ -2,13 +2,23 @@
 import Layout from "../layouts/Layout.astro";
 import WorkDossier from "../components/WorkDossier.astro";
 import { projects } from "../data/projects";
+import { Image } from "astro:assets";
+import avatar from "../assets/avatar.png";
 ---
 
 <Layout
   title="Portfolio | Practical Agent Workflows"
   description="A single-page portfolio focused on practical agent workflows, long-running automation systems, and careful execution."
+  lang="en"
 >
   <main class="page-shell">
+    <div class="lang-switch-row">
+      <a class="lang-switch" href="/zh/" title="切换到中文">
+        <span class="lang-switch-current">EN</span>
+        <span class="lang-switch-divider" aria-hidden="true"></span>
+        <span class="lang-switch-target">中</span>
+      </a>
+    </div>
     <section class="hero" aria-labelledby="hero-heading">
       <p class="hero-kicker">Hi, I am Zhou Le.</p>
       <h1 id="hero-heading">I build agent workflows that already run outside the demo.</h1>
@@ -30,12 +40,12 @@ import { projects } from "../data/projects";
       <div class="about-bridge-grid">
         <div class="profile-card">
           <div class="profile-card-frame">
-            <img
+            <Image
               class="profile-card-avatar"
-              src="https://github.com/fancydirty.png?size=160"
-              alt="GitHub avatar for Zhou Le"
-              width="144"
-              height="144"
+              src={avatar}
+              alt="Portrait of Zhou Le"
+              width={144}
+              height={144}
               loading="lazy"
             />
           </div>
@@ -64,6 +74,28 @@ import { projects } from "../data/projects";
                     rel="noreferrer"
                   >
                     fancydirty
+                  </a>
+                </dd>
+              </div>
+              <div class="profile-card-fact">
+                <dt>Social</dt>
+                <dd>
+                  <a
+                    class="profile-card-link"
+                    href="https://www.linkedin.com/in/%E4%B9%90-%E5%91%A8-967660354/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    LinkedIn
+                  </a>
+                  <span class="profile-card-sep">·</span>
+                  <a
+                    class="profile-card-link"
+                    href="https://space.bilibili.com/5582337?spm_id_from=333.1007.0.0"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Bilibili <span class="social-badge">380k</span>
                   </a>
                 </dd>
               </div>
@@ -97,12 +129,14 @@ import { projects } from "../data/projects";
         <section class="manifesto" aria-labelledby="principles-heading">
         <p class="eyebrow">Operating Principles</p>
         <h2 id="principles-heading">What the work has taught me so far.</h2>
+        <p class="principles-lead">
+          I used to think the hard part of agent workflows was writing better prompts. After three systems, I realized the hard part is designing for failures you cannot fully predict. These are the patterns that keep showing up.
+        </p>
         <ul class="principles-list">
-          <li><strong>State over guesswork.</strong> The system tracks season-level state in SQLite so agents can tell the difference between a finished movie, a partially covered season, and one still waiting for episodes.</li>
-          <li><strong>Evidence before action.</strong> Every critical move requires evidence, derived facts, and a visible decision chain before anything executes.</li>
-          <li><strong>Contracts, not loops.</strong> I split work into Type 1 (one-shot acquisition), Type 2 (tracking initialization), and Type 3 (scheduled monitoring) instead of hiding everything behind one clever agent loop.</li>
-          <li><strong>Guardrails before judgment.</strong> Protected Collections prevent partial result-slicing. Transfer Binding locks URLs to snapshots so agents cannot re-search between decision and execution.</li>
-          <li><strong>Honest failure over fake success.</strong> Users appreciate knowing something cannot be done yet, rather than discovering a silent miss later.</li>
+          <li><strong>"Almost working" is the most expensive state.</strong> A system that fails loudly is cheap to fix. One that fails quietly — a partial season that looks complete, a transferred file in the wrong directory — becomes expensive fast. I design for fast, visible failure.</li>
+          <li><strong>State should outlive the session.</strong> If an agent cannot pick up where it left off after a crash, the state was in the wrong place. This has held true across every project, from content pipelines to media tracking to long-running internal ops.</li>
+          <li><strong>Explicit boundaries beat smart loops.</strong> A single clever loop feels elegant until it meets an edge case. I'd rather have three dumb contracts that each do one thing well than one loop that tries to be smart about everything.</li>
+          <li><strong>The system must be able to refuse.</strong> A workflow that always produces <em>something</em> will eventually produce garbage. I build in explicit "I can't do this yet" states, because honest failure costs less than silent success.</li>
         </ul>
       </section>
 
@@ -110,29 +144,29 @@ import { projects } from "../data/projects";
         <p class="eyebrow">Now</p>
         <h2 id="now-heading">Rebuilding in public, one step at a time.</h2>
         <p>
-          Recently shipped: a public rebuild of clawd-media-track with Type 1, Type 2, and Type 3 task contracts, SQLite state tracking, and a bootstrap flow that can run without my machine.
+          Right now I'm trying to solve a tension: agent skills need to be opinionated enough to actually work, but configurable enough to survive on someone else's machine.
         </p>
         <p>
-          Currently working on: this portfolio, trying to make it a credible record rather than a polished demo. The next thing I want to figure out is how to make agent skills configurable enough that they can adapt to different users without becoming fragile.
+          Most open-source agent tools fall on one side or the other — either too rigid to adapt, or so flexible that they become prompts with extra steps. I don't have a clean answer yet. The next thing I build will be an experiment in finding that balance.
         </p>
 
         <ul class="links-list" aria-label="links">
           <li>
-            <a href="https://github.com/fancydirty" target="_blank" rel="noreferrer">GitHub</a>
-          </li>
-          <li>
-            <a href="https://github.com/fancydirty/clawd-media-track" target="_blank" rel="noreferrer">
-              clawd-media-track
-            </a>
-          </li>
-          <li>
-            <span>contact@zhoule.dev</span>
+            <a href="mailto:fancydirty@gmail.com">fancydirty@gmail.com</a>
           </li>
         </ul>
       </section>
     </section>
 
     <footer class="site-footer">
+      <p class="footer-social">
+        Also on
+        <a href="https://github.com/fancydirty" target="_blank" rel="noreferrer">GitHub</a>
+        ·
+        <a href="https://www.linkedin.com/in/%E4%B9%90-%E5%91%A8-967660354/" target="_blank" rel="noreferrer">LinkedIn</a>
+        ·
+        <a href="https://space.bilibili.com/5582337?spm_id_from=333.1007.0.0" target="_blank" rel="noreferrer">Bilibili</a>
+      </p>
       <p>
         This site is intentionally small. The goal is to show real systems, modestly and
         clearly.

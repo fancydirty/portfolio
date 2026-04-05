@@ -5,7 +5,7 @@
   --text: #34302c;
   --muted: #6f675f;
   --line: #d8d0c5;
-  --accent: #9f4b16;
+  --accent: #a85112;
   --serif: "Newsreader", serif;
   --sans: "Source Sans 3", sans-serif;
   --mono: "JetBrains Mono", monospace;
@@ -25,6 +25,32 @@ html {
   scroll-behavior: smooth;
 }
 
+html[lang="zh"] {
+  --serif: "Noto Serif SC", "Source Han Serif SC", "STSong", serif;
+  --sans: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+html[lang="zh"] .hero h1 {
+  max-width: none;
+}
+
+html[lang="zh"] .hero h1,
+html[lang="zh"] .section-heading h2,
+html[lang="zh"] .manifesto h2,
+html[lang="zh"] .now-panel h2,
+html[lang="zh"] .work-index h2,
+html[lang="zh"] .about-bridge h2,
+html[lang="zh"] .profile-card-name,
+html[lang="zh"] .work-index-copy strong,
+html[lang="zh"] .dossier-header h3 {
+  letter-spacing: 0;
+}
+
+html[lang="zh"] h1,
+html[lang="zh"] h2 {
+  font-weight: 600;
+}
+
 body {
   margin: 0;
   font-family: var(--sans);
@@ -34,6 +60,64 @@ body {
     radial-gradient(circle at top left, rgba(159, 75, 22, 0.08), transparent 22rem),
     linear-gradient(180deg, rgba(255, 255, 255, 0.4), transparent 14rem),
     var(--bg);
+}
+
+.lang-switch-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.5rem;
+}
+
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  color: var(--text);
+  text-decoration: none;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  line-height: 1;
+  transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.lang-switch:hover {
+  background: var(--surface);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.lang-switch-current {
+  opacity: 0.55;
+  font-weight: 400;
+}
+
+.lang-switch-target {
+  font-weight: 600;
+}
+
+.lang-switch-divider {
+  display: inline-block;
+  width: 1px;
+  height: 0.85rem;
+  background: var(--line);
+  margin: 0 0.45rem;
+}
+
+@media (max-width: 640px) {
+  .lang-switch {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.78rem;
+  }
+
+  .lang-switch-divider {
+    height: 0.75rem;
+    margin: 0 0.4rem;
+  }
 }
 
 a {
@@ -60,7 +144,7 @@ img {
 .eyebrow,
 .status-line {
   font-family: var(--mono);
-  font-size: 0.74rem;
+  font-size: 0.87rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -74,7 +158,8 @@ img {
 .hero h1,
 .section-heading h2,
 .manifesto h2,
-.now-panel h2 {
+.now-panel h2,
+.work-index h2 {
   font-family: var(--serif);
   font-weight: 500;
   letter-spacing: -0.025em;
@@ -164,8 +249,8 @@ img {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 0.9rem;
-  padding-top: 0.55rem;
+  gap: 1rem;
+  padding-top: 0.65rem;
   border-top: 1px solid var(--line);
 }
 
@@ -195,6 +280,24 @@ img {
 
 .profile-card-link:hover {
   border-color: currentColor;
+}
+
+.profile-card-sep {
+  color: var(--muted);
+  margin: 0 0.35rem;
+}
+
+.social-badge {
+  display: inline-block;
+  padding: 0.1rem 0.35rem;
+  font-size: 0.65rem;
+  font-family: var(--mono);
+  color: var(--accent);
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  vertical-align: middle;
+  margin-left: 0.25rem;
 }
 
 .about-bridge-copy {
@@ -265,9 +368,7 @@ img {
 
 .work-index h2 {
   margin: 0 0 1.5rem;
-  font-family: var(--serif);
   font-size: clamp(1.8rem, 4vw, 2.25rem);
-  line-height: 1.1;
 }
 
 .work-index-list {
@@ -352,11 +453,11 @@ img {
 .tag-list li {
   border: 1px solid var(--line);
   border-radius: 999px;
-  padding: 0.2rem 0.55rem;
+  padding: 0.35rem 0.75rem;
   font-family: var(--mono);
-  font-size: 0.73rem;
-  color: var(--muted);
-  background: rgba(255, 255, 255, 0.42);
+  font-size: 0.75rem;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.55);
 }
 
 .dossier-grid {
@@ -380,6 +481,10 @@ img {
   text-transform: uppercase;
   color: var(--muted);
   margin: 0 0 0.45rem;
+}
+
+.dossier-cell p {
+  line-height: 1.7;
 }
 
 .dossier-cell p:last-child {
@@ -407,13 +512,16 @@ img {
 }
 
 .diagram-hint {
-  display: block;
-  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.65rem;
+  padding: 0.35rem 0.7rem;
   font-family: var(--mono);
-  font-size: 0.7rem;
-  color: var(--accent);
-  margin-top: 0.5rem;
-  opacity: 1;
+  font-size: 0.72rem;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 999px;
 }
 
 .diagram-modal {
@@ -481,6 +589,16 @@ img {
   border-color: currentColor;
 }
 
+.profile-card-link[href^="http"]::after,
+.project-link-row a[href^="http"]::after,
+.links-list a[href^="http"]::after {
+  content: "↗";
+  display: inline-block;
+  margin-left: 0.2em;
+  font-size: 0.85em;
+  text-decoration: none;
+}
+
 .lower-grid {
   display: grid;
   gap: 1.5rem;
@@ -494,6 +612,12 @@ img {
   border: 1px solid var(--line);
   padding: 1.25rem;
   background: rgba(255, 255, 255, 0.33);
+}
+
+.principles-lead {
+  margin: 1rem 0 0;
+  color: var(--muted);
+  max-width: 52ch;
 }
 
 .principles-list {
@@ -537,11 +661,28 @@ img {
 }
 
 .site-footer {
-  padding-top: 2rem;
-  margin-top: 2.75rem;
-  border-top: 1px solid var(--line);
+  padding: 1.25rem 1rem;
+  margin-top: 2rem;
+  border-top: 2px solid var(--line);
+  background: rgba(255, 255, 255, 0.35);
   color: var(--muted);
   font-size: 0.95rem;
+}
+
+.footer-social {
+  margin: 0 0 0.6rem;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+}
+
+.footer-social a {
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.footer-social a:hover {
+  border-color: currentColor;
 }
 
 @keyframes pulse {
@@ -580,8 +721,12 @@ img {
 }
 
 @media (max-width: 640px) {
+  .hero-br {
+    display: none;
+  }
+
   .page-shell {
-    width: min(100% - 1.25rem, 46rem);
+    width: min(100% - 2.25rem, 46rem);
   }
 
   .profile-card-avatar {
@@ -603,10 +748,27 @@ img {
   .work-index-item {
     grid-template-columns: 1fr;
     gap: 0.5rem;
+    padding: 1.25rem 1rem;
   }
 
   .dossier-grid {
     grid-template-columns: 1fr;
+  }
+
+  html[lang="zh"] .manifesto,
+  html[lang="zh"] .now-panel {
+    padding: 1rem;
+  }
+
+  html[lang="zh"] .manifesto p,
+  html[lang="zh"] .now-panel p,
+  html[lang="zh"] .principles-list li {
+    font-size: 0.98rem;
+    line-height: 1.75;
+  }
+
+  html[lang="zh"] .principles-list {
+    gap: 0.7rem;
   }
 }
 

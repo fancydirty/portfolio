@@ -4,16 +4,18 @@ import "../styles/global.css";
 type Props = {
   title?: string;
   description?: string;
+  lang?: "en" | "zh";
 };
 
 const {
   title = "Portfolio | Agent Workflows and Automation",
   description = "A quiet portfolio focused on practical agent workflows, long-running automation, and system reliability.",
+  lang = "en",
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -23,9 +25,9 @@ const {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Source+Sans+3:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap"
     />
-    <link rel="canonical" href="https://fancydirty.github.io/" />
+    <link rel="canonical" href={lang === "en" ? "https://fancydirty.github.io/" : "https://fancydirty.github.io/zh/"} />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <meta property="og:title" content={title} />

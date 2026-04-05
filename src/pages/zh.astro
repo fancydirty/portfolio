@@ -1,0 +1,167 @@
+---
+import Layout from "../layouts/Layout.astro";
+import WorkDossierZh from "../components/WorkDossierZh.astro";
+import { projects } from "../data/projects-zh";
+import { Image } from "astro:assets";
+import avatar from "../assets/avatar.png";
+---
+
+<Layout
+  title="作品集 | 实用 Agent 工作流"
+  description="一个聚焦于实用 Agent 工作流、长期自动化系统与谨慎执行的单页作品集。"
+  lang="zh"
+>
+  <main class="page-shell">
+    <div class="lang-switch-row">
+      <a class="lang-switch" href="/" title="Switch to English">
+        <span class="lang-switch-target">EN</span>
+        <span class="lang-switch-divider" aria-hidden="true"></span>
+        <span class="lang-switch-current">中</span>
+      </a>
+    </div>
+
+    <section class="hero" aria-labelledby="hero-heading">
+      <p class="hero-kicker">你好，我是周乐。</p>
+      <h1 id="hero-heading">我搭建的<br class="hero-br" />Agent 工作流，<br class="hero-br" />不止于演示环境。</h1>
+      <p class="hero-lead">
+        这里是我做 AI 工具、写 Agent 和搭自动化流程时留下的记录。
+      </p>
+      <p class="hero-supporting">
+        刚入门不久，但我更关心系统能不能在跑通一次之后，还能长期稳定地跑下去；能不能在崩溃后自己接上上下文，而不是从头再来。
+      </p>
+      <p class="status-line">
+        <span class="status-dot" aria-hidden="true"></span>
+        记录真实工作，不是经营人设。
+      </p>
+    </section>
+
+    <section class="about-bridge" aria-labelledby="about-heading">
+      <div class="about-bridge-grid">
+        <div class="profile-card">
+          <div class="profile-card-frame">
+            <Image
+              class="profile-card-avatar"
+              src={avatar}
+              alt="周乐肖像"
+              width={144}
+              height={144}
+              loading="lazy"
+            />
+          </div>
+          <div class="profile-card-copy">
+            <p class="profile-card-name">周乐</p>
+            <dl class="profile-card-facts">
+              <div class="profile-card-fact">
+                <dt>Focus</dt>
+                <dd>Agent 工作流</dd>
+              </div>
+              <div class="profile-card-fact">
+                <dt>Background</dt>
+                <dd>软件工程学士；翻译硕士</dd>
+              </div>
+              <div class="profile-card-fact">
+                <dt>Tools</dt>
+                <dd>Codex, Opencode, OpenClaw</dd>
+              </div>
+              <div class="profile-card-fact">
+                <dt>GitHub</dt>
+                <dd>
+                  <a
+                    class="profile-card-link"
+                    href="https://github.com/fancydirty"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    fancydirty
+                  </a>
+                </dd>
+              </div>
+              <div class="profile-card-fact">
+                <dt>Social</dt>
+                <dd>
+                  <a
+                    class="profile-card-link"
+                    href="https://www.linkedin.com/in/%E4%B9%90-%E5%91%A8-967660354/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    LinkedIn
+                  </a>
+                  <span class="profile-card-sep">·</span>
+                  <a
+                    class="profile-card-link"
+                    href="https://space.bilibili.com/5582337?spm_id_from=333.1007.0.0"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Bilibili <span class="social-badge">380k</span>
+                  </a>
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="about-bridge-copy">
+        <p class="eyebrow">About Me</p>
+        <h2 id="about-heading">从语言学到系统搭建，我在做中学。</h2>
+        <p>
+          电子科大翻译硕士。做 Agent 之前，我做了很多年和文字打交道的事。这段经历让我对两件事特别较真：表达够不够准，结构清不清楚，别人能不能一眼看明白。
+        </p>
+        <p>
+          过去一年，我把这套习惯搬到了 AI 工具、Agent 编程和自动化上。我的学习方式是：先搭一个能长期跑的系统，观察它会在哪里跑偏，再一点点收紧状态、检查和护栏，直到它稳下来。最常用的工具是 Codex、Opencode 和 OpenClaw。
+        </p>
+        </div>
+      </div>
+    </section>
+
+    <WorkDossierZh projects={projects} />
+
+    <section class="lower-grid">
+        <section class="manifesto" aria-labelledby="principles-heading">
+        <p class="eyebrow">Operating Principles</p>
+        <h2 id="principles-heading">工作教会我的事。</h2>
+        <p class="principles-lead">
+          我一度以为 Agent 工作流最难的是写更好的 prompt。搭了三个系统之后才发现，真正的难点是怎么为那些你根本想不到的失败场景做设计。下面是我反复踩到的几条规律。
+        </p>
+        <ul class="principles-list">
+          <li><strong>"差不多能用"是最贵的状态。</strong>报错明显的系统修起来很快；可怕的是那种悄无声息的失败——比如明明少了一集却看起来完整的季度，或者转错目录的文件。这种问题的成本会指数级增长。所以我做设计时，优先让错误尽快暴露出来。</li>
+          <li><strong>状态不能只在内存里活着。</strong>如果 Agent 崩了之后不能从断点继续跑，说明状态放错了地方。这个教训在我做过的每个项目里都成立，不管是内容管道、媒体追踪还是长期运行的内部运维。</li>
+          <li><strong>边界清晰比循环聪明更重要。</strong>一个精巧的循环在碰到边界情况之前总是看起来很优雅。我宁可拆成三个各司其职的简单契约，也不要一个试图把所有事都包办的聪明循环。</li>
+          <li><strong>系统得学会说"不"。</strong>如果一个工作流每次都必须给出一个结果，那它早晚会给出垃圾结果。我会显式地设计"这个我还做不到"的状态，因为诚实承认失败，比默默给出一个错误结果要便宜得多。</li>
+        </ul>
+      </section>
+
+      <section class="now-panel" aria-labelledby="now-heading">
+        <p class="eyebrow">Now</p>
+        <h2 id="now-heading">公开重建，一步一个脚印。</h2>
+        <p>
+          最近在琢磨一个问题：Agent 技能要足够有主见才能真的跑起来，但又得足够灵活才能在别人的机器上活下去。
+        </p>
+        <p>
+          大多数开源 Agent 工具都偏向一边——要么太死板，换个环境就挂；要么太松散，本质上只是多了几步的 prompt。我还没找到那个平衡点。下一个项目，我想专门做做这个实验。
+        </p>
+
+        <ul class="links-list" aria-label="联系方式">
+          <li>
+            <a href="mailto:fancydirty@gmail.com">fancydirty@gmail.com</a>
+          </li>
+        </ul>
+      </section>
+    </section>
+
+    <footer class="site-footer">
+      <p class="footer-social">
+        也在
+        <a href="https://github.com/fancydirty" target="_blank" rel="noreferrer">GitHub</a>
+        ·
+        <a href="https://www.linkedin.com/in/%E4%B9%90-%E5%91%A8-967660354/" target="_blank" rel="noreferrer">LinkedIn</a>
+        ·
+        <a href="https://space.bilibili.com/5582337?spm_id_from=333.1007.0.0" target="_blank" rel="noreferrer">Bilibili</a>
+      </p>
+      <p>
+        这个网站刻意保持小巧。目标是平实而清晰地展示真实的系统。
+      </p>
+    </footer>
+  </main>
+</Layout>
