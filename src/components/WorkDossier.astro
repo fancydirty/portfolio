@@ -43,7 +43,7 @@ const { projects } = Astro.props;
       {
         projects.map((project, index) => (
           <article
-            class={`dossier-panel ${index === 0 ? "is-active" : "is-hidden"}`}
+            class={`dossier-panel ${index === 0 ? "is-active" : ""}`}
             data-project-panel
             data-project-id={project.id}
             hidden={index === 0 ? undefined : true}
@@ -126,8 +126,6 @@ const { projects } = Astro.props;
   const tabs = Array.from(document.querySelectorAll("[data-project-tab]"));
   const panels = Array.from(document.querySelectorAll("[data-project-panel]"));
 
-  panels.forEach((panel) => panel.removeAttribute("hidden"));
-
   const activateProject = (projectId) => {
     tabs.forEach((tab) => {
       const active = tab.dataset.projectId === projectId;
@@ -138,7 +136,7 @@ const { projects } = Astro.props;
     panels.forEach((panel) => {
       const active = panel.dataset.projectId === projectId;
       panel.classList.toggle("is-active", active);
-      panel.classList.toggle("is-hidden", !active);
+      panel.hidden = !active;
     });
   };
 

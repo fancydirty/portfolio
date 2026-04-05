@@ -319,26 +319,12 @@ img {
 }
 
 .dossier-stack {
-  position: relative;
   min-width: 0;
 }
 
 .dossier-panel {
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.45);
-  opacity: 0;
-  visibility: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  transition: opacity 150ms ease, visibility 150ms ease;
-}
-
-.dossier-panel.is-active {
-  opacity: 1;
-  visibility: visible;
-  position: static;
 }
 
 .dossier-header {
@@ -434,9 +420,9 @@ img {
   padding: 0;
   border: none;
   background: var(--bg);
-  max-width: 90vw;
-  max-height: 90vh;
-  overflow: auto;
+  width: min(90vw, 1100px);
+  height: min(85vh, 750px);
+  overflow: hidden;
 }
 
 .diagram-modal::backdrop {
@@ -470,8 +456,17 @@ img {
 }
 
 .diagram-modal .modal-content {
-  padding: 2rem;
-  min-width: min(90vw, 800px);
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.diagram-modal .modal-content svg {
+  width: 100%;
+  height: auto;
+  max-height: calc(85vh - 4rem);
 }
 
 .project-link-row a,
