@@ -1,0 +1,616 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Patrick+Hand&family=JetBrains+Mono:wght@400;500&display=swap");
+
+:root {
+  /* Sketchy notebook palette */
+  --sk-bg: #fefcf3;
+  --sk-surface: #f5f0e5;
+  --sk-surface-strong: #ede7da;
+  --sk-text: #2c2c2c;
+  --sk-muted: #6b6560;
+  --sk-line: #c4b8a0;
+  --sk-accent: #8b5e3c;
+  --sk-shadow: rgba(44, 44, 44, 0.08);
+  --sk-serif: "Caveat", cursive;
+  --sk-sans: "Patrick Hand", cursive;
+  --sk-mono: "JetBrains Mono", monospace;
+  --sk-container: min(100% - 2rem, 46rem);
+  --sk-section-gap: clamp(3.5rem, 7vw, 6.5rem);
+  --sk-line-height: 28px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--sk-bg);
+  color: var(--sk-text);
+  scroll-behavior: smooth;
+}
+
+/* Notebook paper background with ruled lines */
+body {
+  margin: 0;
+  font-family: var(--sk-sans);
+  font-size: 1.1rem;
+  line-height: var(--sk-line-height);
+  min-height: 100vh;
+  background-color: var(--sk-bg);
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.page-shell {
+  width: var(--sk-container);
+  margin: 0 auto;
+  padding: clamp(3rem, 8vw, 6rem) 0 4rem;
+}
+
+/* Hero section with loose handwriting feel */
+.hero {
+  padding-bottom: var(--sk-section-gap);
+  border-bottom: 1.5px solid var(--sk-line);
+}
+
+.hero-kicker,
+.eyebrow,
+.status-line {
+  font-family: var(--sk-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.hero-kicker,
+.eyebrow {
+  color: var(--sk-muted);
+  margin: 0 0 0.5rem;
+}
+
+/* Hand-drawn headings with Caveat */
+.hero h1,
+.section-heading h2,
+.manifesto h2,
+.now-panel h2 {
+  font-family: var(--sk-serif);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  margin: 0;
+  color: var(--sk-text);
+}
+
+.hero h1 {
+  font-size: clamp(2.6rem, 6.5vw, 4.4rem);
+  max-width: 12ch;
+  font-weight: 700;
+  transform: rotate(-0.5deg);
+}
+
+.hero-lead {
+  max-width: 41rem;
+  font-size: 1.2rem;
+  color: var(--sk-muted);
+  margin: 1.25rem 0 0;
+  line-height: var(--sk-line-height);
+}
+
+.hero-supporting {
+  max-width: 37rem;
+  margin: 0.75rem 0 0;
+  font-size: 1.05rem;
+  color: var(--sk-text);
+  line-height: var(--sk-line-height);
+}
+
+.status-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+  color: var(--sk-accent);
+}
+
+/* Hand-drawn status dot with wobbly animation */
+.status-dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 60% 40% 55% 45%;
+  background: currentColor;
+  animation: sketch-pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes sketch-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(0.9) rotate(0deg);
+  }
+  25% {
+    border-radius: 45% 55% 60% 40%;
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05) rotate(5deg);
+    border-radius: 55% 45% 50% 50%;
+  }
+  75% {
+    border-radius: 50% 50% 45% 55%;
+  }
+}
+
+/* About bridge with sketchy profile card */
+.about-bridge {
+  padding-top: calc(var(--sk-section-gap) * 0.72);
+}
+
+.about-bridge-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+/* Hand-drawn profile card with irregular border-radius */
+.profile-card {
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+  padding: 1.1rem;
+  border: 2px solid var(--sk-line);
+  border-radius: 3px 7px 2px 8px;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 2px 3px 0 var(--sk-shadow);
+}
+
+.profile-card-frame {
+  width: fit-content;
+  padding: 0.4rem;
+  border: 1.5px solid var(--sk-line);
+  border-radius: 5px 2px 7px 4px;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.profile-card-avatar {
+  width: 8rem;
+  height: 8rem;
+  object-fit: cover;
+  border-radius: 2px 6px 3px 5px;
+  filter: contrast(1.05) saturate(0.95);
+}
+
+.profile-card-copy {
+  min-width: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.profile-card-name {
+  margin: 0;
+  font-family: var(--sk-serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.1;
+  transform: rotate(-0.3deg);
+}
+
+.profile-card-facts {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.profile-card-fact {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.9rem;
+  padding-top: 0.5rem;
+  border-top: 1.5px dashed var(--sk-line);
+}
+
+.profile-card-fact dt {
+  flex: 0 0 5.5rem;
+  margin: 0;
+  font-family: var(--sk-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sk-muted);
+}
+
+.profile-card-fact dd {
+  flex: 1 1 auto;
+  margin: 0;
+  color: var(--sk-text);
+  line-height: 1.4;
+  text-align: right;
+}
+
+.profile-card-link {
+  color: var(--sk-accent);
+  text-decoration: none;
+  border-bottom: 1.5px solid transparent;
+  transition: border-color 120ms ease;
+}
+
+.profile-card-link:hover {
+  border-color: currentColor;
+}
+
+.about-bridge-copy {
+  display: grid;
+  gap: 0.75rem;
+  padding-left: 1rem;
+  border-left: 2px dashed var(--sk-line);
+  max-width: 42rem;
+}
+
+.about-bridge h2 {
+  margin: 0;
+  font-family: var(--sk-serif);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.08;
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  max-width: 20ch;
+  transform: rotate(0.3deg);
+}
+
+.about-bridge p {
+  margin: 0;
+  line-height: var(--sk-line-height);
+}
+
+.about-bridge-copy > p:not(.eyebrow) {
+  color: var(--sk-muted);
+}
+
+/* Section styles */
+.section {
+  padding-top: var(--sk-section-gap);
+}
+
+.section-heading {
+  margin-bottom: 1.5rem;
+}
+
+.section-heading h2,
+.manifesto h2,
+.now-panel h2 {
+  font-size: clamp(1.75rem, 4vw, 2.4rem);
+  max-width: 22ch;
+  font-weight: 700;
+}
+
+/* Work section with sketchy dossier */
+.work-section {
+  padding-top: var(--sk-section-gap);
+}
+
+.work-shell {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.work-index {
+  border-top: 1.5px dashed var(--sk-line);
+}
+
+.work-index-label {
+  padding-top: 0.75rem;
+}
+
+.work-index h2 {
+  margin: 0 0 1.25rem;
+  font-family: var(--sk-serif);
+  font-size: clamp(1.75rem, 4vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.08;
+  transform: rotate(-0.2deg);
+}
+
+.work-index-list {
+  border-top: 1.5px dashed var(--sk-line);
+}
+
+/* Hand-drawn tab buttons */
+.work-index-item {
+  width: 100%;
+  border: 0;
+  border-bottom: 1.5px dashed var(--sk-line);
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem;
+  padding: 0.9rem 0;
+  cursor: pointer;
+  transition: background-color 140ms ease, color 140ms ease;
+  font-family: var(--sk-sans);
+  font-size: 1.05rem;
+}
+
+.work-index-item:hover,
+.work-index-item.is-active {
+  background: rgba(139, 94, 60, 0.06);
+}
+
+.work-index-number {
+  font-family: var(--sk-mono);
+  font-size: 0.8rem;
+  color: var(--sk-accent);
+  padding-top: 0.15rem;
+}
+
+.work-index-copy {
+  min-width: 0;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.work-index-copy strong {
+  font-family: var(--sk-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--sk-text);
+}
+
+.work-index-copy span {
+  color: var(--sk-muted);
+  font-size: 1rem;
+  line-height: var(--sk-line-height);
+}
+
+.dossier-stack {
+  min-width: 0;
+}
+
+/* Hand-drawn dossier panels */
+.dossier-panel {
+  border: 2px solid var(--sk-line);
+  border-radius: 4px 2px 6px 3px;
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 2px 3px 0 var(--sk-shadow);
+}
+
+.dossier-header {
+  padding: 1rem 1rem 0.9rem;
+  border-bottom: 1.5px dashed var(--sk-line);
+}
+
+.dossier-header h3 {
+  margin: 0;
+  font-family: var(--sk-serif);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.08;
+  transform: rotate(-0.3deg);
+}
+
+/* Hand-drawn tags/pills with wobbly borders */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0;
+}
+
+.tag-list li {
+  border: 1.5px solid var(--sk-line);
+  border-radius: 12px 8px 14px 10px;
+  padding: 0.15rem 0.65rem;
+  font-family: var(--sk-mono);
+  font-size: 0.72rem;
+  color: var(--sk-muted);
+  background: rgba(255, 255, 255, 0.55);
+  transform: rotate(0.5deg);
+}
+
+.tag-list li:nth-child(2) {
+  transform: rotate(-0.3deg);
+}
+
+.tag-list li:nth-child(3) {
+  transform: rotate(0.2deg);
+}
+
+.dossier-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.dossier-cell {
+  padding: 1rem;
+  border-bottom: 1.5px dashed var(--sk-line);
+}
+
+.dossier-cell-wide {
+  grid-column: auto;
+}
+
+.dossier-label {
+  font-family: var(--sk-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sk-muted);
+  margin: 0 0 0.35rem;
+}
+
+.dossier-cell p:last-child {
+  margin: 0;
+}
+
+.dossier-cell p {
+  line-height: var(--sk-line-height);
+}
+
+.project-link-row {
+  margin: 0.9rem 0 0 !important;
+}
+
+.project-link-row a,
+.links-list a {
+  color: var(--sk-accent);
+  text-decoration: none;
+  border-bottom: 1.5px dashed transparent;
+  transition: border-color 120ms ease;
+  font-weight: 500;
+}
+
+.project-link-row a:hover,
+.links-list a:hover {
+  border-color: currentColor;
+}
+
+/* Lower grid with notebook card feel */
+.lower-grid {
+  display: grid;
+  gap: 1.5rem;
+  padding-top: var(--sk-section-gap);
+  border-top: 1.5px dashed var(--sk-line);
+  margin-top: var(--sk-section-gap);
+}
+
+/* Hand-drawn manifesto and now panels */
+.manifesto,
+.now-panel {
+  border: 2px solid var(--sk-line);
+  border-radius: 3px 6px 2px 5px;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 2px 3px 0 var(--sk-shadow);
+}
+
+.manifesto h2 {
+  transform: rotate(0.2deg);
+}
+
+.now-panel h2 {
+  transform: rotate(-0.2deg);
+}
+
+.principles-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.9rem 0 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.principles-list li {
+  display: flex;
+  gap: 0.75rem;
+  line-height: var(--sk-line-height);
+}
+
+.principles-list li::before {
+  content: "✓";
+  color: var(--sk-accent);
+  font-family: var(--sk-serif);
+  font-weight: 700;
+  font-size: 1.1rem;
+  line-height: var(--sk-line-height);
+}
+
+.now-panel p {
+  margin: 0.75rem 0 0;
+  color: var(--sk-muted);
+  line-height: var(--sk-line-height);
+}
+
+.links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.9rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem 1.1rem;
+  font-family: var(--sk-mono);
+  font-size: 0.82rem;
+}
+
+/* Hand-written footer feel */
+.site-footer {
+  padding-top: 2rem;
+  margin-top: 2.75rem;
+  border-top: 1.5px dashed var(--sk-line);
+  color: var(--sk-muted);
+  font-size: 1rem;
+  line-height: var(--sk-line-height);
+}
+
+.site-footer p {
+  font-style: italic;
+}
+
+/* Responsive breakpoints */
+@media (min-width: 860px) {
+  .about-bridge-grid {
+    grid-template-columns: minmax(14rem, 0.72fr) minmax(0, 1.28fr);
+    align-items: start;
+  }
+
+  .work-shell {
+    grid-template-columns: minmax(15rem, 0.92fr) minmax(0, 1.48fr);
+    align-items: start;
+  }
+
+  .work-index {
+    position: sticky;
+    top: 1.5rem;
+  }
+
+  .lower-grid {
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: start;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --sk-line-height: 26px;
+  }
+
+  .page-shell {
+    width: min(100% - 1.25rem, 46rem);
+  }
+
+  .profile-card-avatar {
+    width: 6.75rem;
+    height: 6.75rem;
+  }
+
+  .profile-card-fact {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+    justify-content: start;
+  }
+
+  .profile-card-fact dd {
+    text-align: left;
+  }
+
+  .work-index-item {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+
+  .dossier-grid {
+    grid-template-columns: 1fr;
+  }
+}

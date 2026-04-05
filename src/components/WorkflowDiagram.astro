@@ -1,0 +1,302 @@
+---
+// Workflow Diagram for WorkDossier section
+// Inline SVG - no external dependencies
+---
+
+<svg
+  viewBox="0 0 800 520"
+  width="100%"
+  height="auto"
+  preserveAspectRatio="xMidYMid meet"
+  role="img"
+  aria-labelledby="workflow-title workflow-desc"
+  xmlns="http://www.w3.org/2000/svg"
+  style="display: block; max-width: 100%;"
+>
+  <title id="workflow-title">clawd-media-track workflow</title>
+  <desc id="workflow-desc">Flowchart showing the workflow from bootstrap gate through environment check, task routing to three types of operations, and guardrails.</desc>
+
+  <!-- Definitions -->
+  <defs>
+    <filter id="soft-shadow" x="-2%" y="-2%" width="104%" height="104%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#34302c" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="800" height="520" fill="#faf7f1" rx="4"/>
+
+  <!-- Header -->
+  <text
+    x="400"
+    y="28"
+    text-anchor="middle"
+    style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; fill: #9f4b16; letter-spacing: 0.05em;"
+  >
+    clawd-media-track workflow
+  </text>
+
+  <!-- === NODES === -->
+
+  <!-- Bootstrap Gate (A) -->
+  <rect x="320" y="50" width="160" height="40" rx="20" fill="#faf7f1" stroke="#34302c" stroke-width="2" filter="url(#soft-shadow)"/>
+  <text
+    x="400"
+    y="75"
+    text-anchor="middle"
+    style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; fill: #34302c;"
+  >
+    Bootstrap Gate
+  </text>
+
+  <!-- Decision: Environment Ready? (B) -->
+  <polygon
+    points="400,110 450,135 400,160 350,135"
+    fill="#f1ece4"
+    stroke="#9f4b16"
+    stroke-width="2"
+    filter="url(#soft-shadow)"
+  />
+  <text
+    x="400"
+    y="130"
+    text-anchor="middle"
+    style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; fill: #34302c;"
+  >
+    Environment
+  </text>
+  <text
+    x="400"
+    y="142"
+    text-anchor="middle"
+    style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; fill: #34302c;"
+  >
+    Ready?
+  </text>
+
+  <!-- Ask Human (C) - warmer fill -->
+  <rect x="90" y="115" width="150" height="40" rx="8" fill="#f5efe6" stroke="#9f4b16" stroke-width="1.5" filter="url(#soft-shadow)"/>
+  <text
+    x="165"
+    y="134"
+    text-anchor="middle"
+    style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; fill: #34302c;"
+  >
+    Ask Human For
+  </text>
+  <text
+    x="165"
+    y="146"
+    text-anchor="middle"
+    style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; fill: #34302c;"
+  >
+    Credentials
+  </text>
+
+  <!-- Route Task (D) -->
+  <rect x="320" y="185" width="160" height="40" rx="20" fill="#faf7f1" stroke="#34302c" stroke-width="2" filter="url(#soft-shadow)"/>
+  <text
+    x="400"
+    y="210"
+    text-anchor="middle"
+    style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; fill: #34302c;"
+  >
+    Route Task
+  </text>
+
+  <!-- Type 1: One-time acquisition (E) -->
+  <rect x="80" y="250" width="170" height="36" rx="8" fill="#f1ece4" stroke="#34302c" stroke-width="1.5"/>
+  <text
+    x="165"
+    y="272"
+    text-anchor="middle"
+    style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; fill: #34302c;"
+  >
+    Type 1: One-time
+  </text>
+
+  <!-- Type 2: Tracking initialization (F) -->
+  <rect x="315" y="250" width="170" height="36" rx="8" fill="#f1ece4" stroke="#34302c" stroke-width="1.5"/>
+  <text
+    x="400"
+    y="272"
+    text-anchor="middle"
+    style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; fill: #34302c;"
+  >
+    Type 2: Tracking
+  </text>
+
+  <!-- Type 3: Scheduled monitoring (G) -->
+  <rect x="550" y="250" width="170" height="36" rx="8" fill="#f1ece4" stroke="#34302c" stroke-width="1.5"/>
+  <text
+    x="635"
+    y="272"
+    text-anchor="middle"
+    style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; fill: #34302c;"
+  >
+    Type 3: Scheduled
+  </text>
+
+  <!-- Pipeline H -->
+  <rect x="80" y="310" width="170" height="56" rx="8" fill="#faf7f1" stroke="#34302c" stroke-width="1"/>
+  <text
+    x="165"
+    y="330"
+    text-anchor="middle"
+    style="font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 400; fill: #6f675f;"
+  >
+    Search → Evidence →
+  </text>
+  <text
+    x="165"
+    y="344"
+    text-anchor="middle"
+    style="font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 400; fill: #6f675f;"
+  >
+    Confirm → Transfer →
+  </text>
+  <text
+    x="165"
+    y="358"
+    text-anchor="middle"
+    style="font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 400; fill: #6f675f;"
+  >
+    Verify
+  </text>
+
+  <!-- Pipeline I -->
+  <rect x="315" y="310" width="170" height="56" rx="8" fill="#faf7f1" stroke="#34302c" stroke-width="1"/>
+  <text
+    x="400"
+    y="332"
+    text-anchor="middle"
+    style="font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 400; fill: #6f675f;"
+  >
+    Search → Transfer →
+  </text>
+  <text
+    x="400"
+    y="348"
+    text-anchor="middle"
+    style="font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 400; fill: #6f675f;"
+  >
+    Update DB → Verify
+  </text>
+
+  <!-- Pipeline J -->
+  <rect x="550" y="310" width="170" height="56" rx="8" fill="#faf7f1" stroke="#34302c" stroke-width="1"/>
+  <text
+    x="635"
+    y="332"
+    text-anchor="middle"
+    style="font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 400; fill: #6f675f;"
+  >
+    Sync DB → Check →
+  </text>
+  <text
+    x="635"
+    y="348"
+    text-anchor="middle"
+    style="font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 400; fill: #6f675f;"
+  >
+    Search → Transfer →
+  </text>
+  <text
+    x="635"
+    y="362"
+    text-anchor="middle"
+    style="font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 400; fill: #6f675f;"
+  >
+    Mark Obtained
+  </text>
+
+  <!-- Guardrails (K) - dashed border -->
+  <rect x="220" y="410" width="360" height="80" rx="12" fill="#faf7f1" stroke="#9f4b16" stroke-width="2" stroke-dasharray="6,4" filter="url(#soft-shadow)"/>
+  <text
+    x="400"
+    y="432"
+    text-anchor="middle"
+    style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; fill: #9f4b16;"
+  >
+    Guardrails
+  </text>
+  <text
+    x="400"
+    y="455"
+    text-anchor="middle"
+    style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 400; fill: #34302c;"
+  >
+    No glue scripts • No dangerous flatten
+  </text>
+  <text
+    x="400"
+    y="475"
+    text-anchor="middle"
+    style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 400; fill: #34302c;"
+  >
+    No recursive protected scans • Verify after side effects
+  </text>
+
+  <!-- === ARROWS === -->
+
+  <!-- A to B -->
+  <line x1="400" y1="90" x2="400" y2="110" stroke="#d8d0c5" stroke-width="2"/>
+  <polygon points="400,110 396,102 404,102" fill="#d8d0c5"/>
+
+  <!-- B to C (No) -->
+  <path d="M 350 135 Q 290 135 240 135" fill="none" stroke="#d8d0c5" stroke-width="1.5"/>
+  <line x1="240" y1="135" x2="240" y2="115" stroke="#d8d0c5" stroke-width="1.5"/>
+  <polygon points="240,115 236,123 244,123" fill="#d8d0c5"/>
+  <text x="280" y="128" style="font-family: 'JetBrains Mono', monospace; font-size: 8px; fill: #6f675f;">No</text>
+
+  <!-- C back to B -->
+  <path d="M 90 135 Q 60 135 60 155 Q 60 175 150 175 Q 280 175 320 145" fill="none" stroke="#d8d0c5" stroke-width="1.5" stroke-dasharray="3,2"/>
+
+  <!-- B to D (Yes) -->
+  <line x1="400" y1="160" x2="400" y2="185" stroke="#d8d0c5" stroke-width="2"/>
+  <polygon points="400,185 396,177 404,177" fill="#d8d0c5"/>
+  <text x="408" y="176" style="font-family: 'JetBrains Mono', monospace; font-size: 8px; fill: #6f675f;">Yes</text>
+
+  <!-- D to E -->
+  <line x1="320" y1="205" x2="247" y2="205" stroke="#d8d0c5" stroke-width="1.5"/>
+  <line x1="247" y1="205" x2="247" y2="250" stroke="#d8d0c5" stroke-width="1.5"/>
+  <polygon points="247,250 243,242 251,242" fill="#d8d0c5"/>
+
+  <!-- D to F -->
+  <line x1="400" y1="225" x2="400" y2="250" stroke="#d8d0c5" stroke-width="1.5"/>
+  <polygon points="400,250 396,242 404,242" fill="#d8d0c5"/>
+
+  <!-- D to G -->
+  <line x1="480" y1="205" x2="553" y2="205" stroke="#d8d0c5" stroke-width="1.5"/>
+  <line x1="553" y1="205" x2="553" y2="250" stroke="#d8d0c5" stroke-width="1.5"/>
+  <polygon points="553,250 549,242 557,242" fill="#d8d0c5"/>
+
+  <!-- E to H -->
+  <line x1="165" y1="286" x2="165" y2="310" stroke="#d8d0c5" stroke-width="1.5"/>
+  <polygon points="165,310 161,302 169,302" fill="#d8d0c5"/>
+
+  <!-- F to I -->
+  <line x1="400" y1="286" x2="400" y2="310" stroke="#d8d0c5" stroke-width="1.5"/>
+  <polygon points="400,310 396,302 404,302" fill="#d8d0c5"/>
+
+  <!-- G to J -->
+  <line x1="635" y1="286" x2="635" y2="310" stroke="#d8d0c5" stroke-width="1.5"/>
+  <polygon points="635,310 631,302 639,302" fill="#d8d0c5"/>
+
+  <!-- H to K -->
+  <line x1="165" y1="366" x2="165" y2="390" stroke="#d8d0c5" stroke-width="1.5"/>
+  <line x1="165" y1="390" x2="260" y2="390" stroke="#d8d0c5" stroke-width="1.5"/>
+  <line x1="260" y1="390" x2="260" y2="410" stroke="#d8d0c5" stroke-width="1.5"/>
+  <polygon points="260,410 256,402 264,402" fill="#d8d0c5"/>
+
+  <!-- I to K -->
+  <line x1="400" y1="366" x2="400" y2="410" stroke="#d8d0c5" stroke-width="1.5"/>
+  <polygon points="400,410 396,402 404,402" fill="#d8d0c5"/>
+
+  <!-- J to K -->
+  <line x1="635" y1="366" x2="635" y2="390" stroke="#d8d0c5" stroke-width="1.5"/>
+  <line x1="635" y1="390" x2="540" y2="390" stroke="#d8d0c5" stroke-width="1.5"/>
+  <line x1="540" y1="390" x2="540" y2="410" stroke="#d8d0c5" stroke-width="1.5"/>
+  <polygon points="540,410 536,402 544,402" fill="#d8d0c5"/>
+
+</svg>

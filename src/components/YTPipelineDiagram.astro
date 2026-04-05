@@ -1,0 +1,121 @@
+---
+// YT Email Pipeline Workflow Diagram for WorkDossier section
+// Inline SVG - no external dependencies
+---
+
+<svg
+  viewBox="0 0 800 520"
+  width="100%"
+  height="auto"
+  preserveAspectRatio="xMidYMid meet"
+  role="img"
+  aria-labelledby="yt-title yt-desc"
+  xmlns="http://www.w3.org/2000/svg"
+  style="display: block; max-width: 100%;"
+>
+  <title id="yt-title">private enterprise workflow</title>
+  <desc id="yt-desc">Flowchart showing email polling, detail fetch, screenshot download, AI analysis, and notification steps.</desc>
+
+  <defs>
+    <filter id="yt-shadow" x="-2%" y="-2%" width="104%" height="104%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#34302c" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="520" fill="#faf7f1" rx="4"/>
+
+  <text
+    x="400"
+    y="28"
+    text-anchor="middle"
+    style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; fill: #9f4b16; letter-spacing: 0.05em;"
+  >
+    private enterprise workflow
+  </text>
+
+  <!-- Nodes -->
+
+  <!-- Step 1: Webmail Polling -->
+  <rect x="70" y="60" width="140" height="44" rx="8" fill="#f5efe6" stroke="#9f4b16" stroke-width="1.5" filter="url(#yt-shadow)"/>
+  <text x="140" y="80" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; fill: #34302c;">Webmail Polling</text>
+  <text x="140" y="94" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; fill: #9f4b16;">Step 1</text>
+
+  <!-- Step 2: Detail Fetch -->
+  <rect x="260" y="60" width="140" height="44" rx="8" fill="#f5efe6" stroke="#9f4b16" stroke-width="1.5" filter="url(#yt-shadow)"/>
+  <text x="330" y="80" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; fill: #34302c;">Detail Fetch</text>
+  <text x="330" y="94" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; fill: #9f4b16;">Step 2</text>
+
+  <!-- Decision: Has Attachment? -->
+  <polygon points="475,60 525,82 475,104 425,82" fill="#f1ece4" stroke="#9f4b16" stroke-width="2" filter="url(#yt-shadow)"/>
+  <text x="475" y="79" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; fill: #34302c;">Has</text>
+  <text x="475" y="91" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; fill: #34302c;">Attachment?</text>
+
+  <!-- Discarded (no) -->
+  <rect x="410" y="150" width="130" height="36" rx="8" fill="#faf7f1" stroke="#34302c" stroke-width="1.5" filter="url(#yt-shadow)"/>
+  <text x="475" y="172" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; fill: #34302c;">Discarded</text>
+
+  <!-- Step 2.5: Screenshot Download -->
+  <rect x="590" y="60" width="150" height="44" rx="8" fill="#f5efe6" stroke="#9f4b16" stroke-width="1.5" filter="url(#yt-shadow)"/>
+  <text x="665" y="80" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; fill: #34302c;">Screenshot Download</text>
+  <text x="665" y="94" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; fill: #9f4b16;">Step 2.5</text>
+
+  <!-- Step 3: AI Analysis -->
+  <rect x="330" y="240" width="140" height="44" rx="8" fill="#f5efe6" stroke="#9f4b16" stroke-width="1.5" filter="url(#yt-shadow)"/>
+  <text x="400" y="260" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; fill: #34302c;">AI Analysis</text>
+  <text x="400" y="274" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; fill: #9f4b16;">Step 3</text>
+
+  <!-- Decision: Has Suggestions? -->
+  <polygon points="400,340 450,362 400,384 350,362" fill="#f1ece4" stroke="#9f4b16" stroke-width="2" filter="url(#yt-shadow)"/>
+  <text x="400" y="359" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; fill: #34302c;">Has</text>
+  <text x="400" y="371" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; fill: #34302c;">Suggestions?</text>
+
+  <!-- No Suggestions -->
+  <rect x="520" y="344" width="130" height="36" rx="8" fill="#faf7f1" stroke="#34302c" stroke-width="1.5" filter="url(#yt-shadow)"/>
+  <text x="585" y="366" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; fill: #34302c;">No Suggestions</text>
+
+  <!-- Step 4: WeChat Notification -->
+  <rect x="330" y="430" width="140" height="44" rx="8" fill="#f5efe6" stroke="#9f4b16" stroke-width="1.5" filter="url(#yt-shadow)"/>
+  <text x="400" y="450" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; fill: #34302c;">WeChat Notify</text>
+  <text x="400" y="464" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; fill: #9f4b16;">Step 4</text>
+
+  <!-- End: Notified -->
+  <rect x="330" y="430" width="140" height="44" rx="20" fill="#faf7f1" stroke="#34302c" stroke-width="2" filter="url(#yt-shadow)" style="display:none;"/>
+
+  <!-- Arrows -->
+
+  <!-- 1 -> 2 -->
+  <line x1="210" y1="82" x2="260" y2="82" stroke="#34302c" stroke-width="1.5"/>
+  <polygon points="260,82 254,78 254,86" fill="#34302c"/>
+
+  <!-- 2 -> decision -->
+  <line x1="400" y1="82" x2="425" y2="82" stroke="#34302c" stroke-width="1.5"/>
+  <polygon points="425,82 419,78 419,86" fill="#34302c"/>
+
+  <!-- decision yes -> 2.5 -->
+  <line x1="525" y1="82" x2="590" y2="82" stroke="#34302c" stroke-width="1.5"/>
+  <polygon points="590,82 584,78 584,86" fill="#34302c"/>
+  <text x="558" y="76" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; fill: #9f4b16;">yes</text>
+
+  <!-- decision no -> discarded -->
+  <line x1="475" y1="104" x2="475" y2="150" stroke="#34302c" stroke-width="1.5"/>
+  <polygon points="475,150 471,144 479,144" fill="#34302c"/>
+  <text x="485" y="130" text-anchor="start" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; fill: #9f4b16;">no</text>
+
+  <!-- 2.5 -> 3 (down and left) -->
+  <polyline points="665,104 665,180 400,180 400,240" fill="none" stroke="#34302c" stroke-width="1.5"/>
+  <polygon points="400,240 396,234 404,234" fill="#34302c"/>
+
+  <!-- 3 -> decision -->
+  <line x1="400" y1="284" x2="400" y2="340" stroke="#34302c" stroke-width="1.5"/>
+  <polygon points="400,340 396,334 404,334" fill="#34302c"/>
+
+  <!-- decision yes -> notify -->
+  <line x1="400" y1="384" x2="400" y2="430" stroke="#34302c" stroke-width="1.5"/>
+  <polygon points="400,430 396,424 404,424" fill="#34302c"/>
+  <text x="412" y="410" text-anchor="start" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; fill: #9f4b16;">yes</text>
+
+  <!-- decision no -> no suggestions -->
+  <line x1="450" y1="362" x2="520" y2="362" stroke="#34302c" stroke-width="1.5"/>
+  <polygon points="520,362 514,358 514,366" fill="#34302c"/>
+  <text x="485" y="354" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; fill: #9f4b16;">no</text>
+</svg>
