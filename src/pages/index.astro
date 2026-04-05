@@ -1,11 +1,142 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
+import WorkDossier from "../components/WorkDossier.astro";
+import { projects } from "../data/projects";
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+  title="Portfolio | Practical Agent Workflows"
+  description="A single-page portfolio focused on practical agent workflows, long-running automation systems, and careful execution."
+>
+  <main class="page-shell">
+    <section class="hero" aria-labelledby="hero-heading">
+      <p class="hero-kicker">Hi, I am Zhou Le.</p>
+      <h1 id="hero-heading">I build agent workflows that already run outside the demo.</h1>
+      <p class="hero-lead">
+        This site is a small record of systems I have built while learning AI tooling, coding
+        agents, and workflow automation through practice.
+      </p>
+      <p class="hero-supporting">
+        I am still early in this work, but I care most about systems that keep their state,
+        recover context, and stay useful after the first successful run.
+      </p>
+      <p class="status-line">
+        <span class="status-dot" aria-hidden="true"></span>
+        A small record of real work, not a personal brand exercise.
+      </p>
+    </section>
+
+    <section class="about-bridge" aria-labelledby="about-heading">
+      <div class="about-bridge-grid">
+        <div class="profile-card">
+          <div class="profile-card-frame">
+            <img
+              class="profile-card-avatar"
+              src="https://github.com/fancydirty.png?size=160"
+              alt="GitHub avatar for Zhou Le"
+              width="144"
+              height="144"
+              loading="lazy"
+            />
+          </div>
+          <div class="profile-card-copy">
+            <p class="profile-card-name">Zhou Le</p>
+            <dl class="profile-card-facts">
+              <div class="profile-card-fact">
+                <dt>Focus</dt>
+                <dd>Agent workflows</dd>
+              </div>
+              <div class="profile-card-fact">
+                <dt>Background</dt>
+                <dd>B.Eng. in Software Engineering; M.A. in Translation</dd>
+              </div>
+              <div class="profile-card-fact">
+                <dt>Tools</dt>
+                <dd>Codex, Opencode, OpenClaw</dd>
+              </div>
+              <div class="profile-card-fact">
+                <dt>GitHub</dt>
+                <dd>
+                  <a
+                    class="profile-card-link"
+                    href="https://github.com/fancydirty"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    fancydirty
+                  </a>
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="about-bridge-copy">
+        <p class="eyebrow">About Me</p>
+        <h2 id="about-heading">I came to systems work through language, and I am learning it by building.</h2>
+        <p>
+          I hold a master's degree in translation from UESTC. Before I started building agent
+          workflows, I spent years working with language and content. That background made me care
+          about precision, structure, and whether something still makes sense once another person
+          has to pick it up.
+        </p>
+        <p>
+          Over the last year, I have turned that same habit toward AI tooling, coding agents, and
+          workflow automation. I learn by building systems that need to keep running, seeing where
+          they drift, and then tightening the state, checks, and guardrails until they behave
+          better. Codex, Opencode, and OpenClaw are the tools I return to most. The projects below
+          are the clearest record of that shift so far.
+        </p>
+        </div>
+      </div>
+    </section>
+
+    <WorkDossier projects={projects} />
+
+    <section class="lower-grid">
+        <section class="manifesto" aria-labelledby="principles-heading">
+        <p class="eyebrow">Operating Principles</p>
+        <h2 id="principles-heading">What the work has taught me so far.</h2>
+        <ul class="principles-list">
+          <li><strong>State over guesswork.</strong> The system tracks season-level state in SQLite so agents can tell the difference between a finished movie, a partially covered season, and one still waiting for episodes.</li>
+          <li><strong>Evidence before action.</strong> Every critical move requires evidence, derived facts, and a visible decision chain before anything executes.</li>
+          <li><strong>Contracts, not loops.</strong> I split work into Type 1 (one-shot acquisition), Type 2 (tracking initialization), and Type 3 (scheduled monitoring) instead of hiding everything behind one clever agent loop.</li>
+          <li><strong>Guardrails before judgment.</strong> Protected Collections prevent partial result-slicing. Transfer Binding locks URLs to snapshots so agents cannot re-search between decision and execution.</li>
+          <li><strong>Honest failure over fake success.</strong> Users appreciate knowing something cannot be done yet, rather than discovering a silent miss later.</li>
+        </ul>
+      </section>
+
+      <section class="now-panel" aria-labelledby="now-heading">
+        <p class="eyebrow">Now</p>
+        <h2 id="now-heading">Rebuilding in public, one step at a time.</h2>
+        <p>
+          Recently shipped: a public rebuild of clawd-media-track with Type 1, Type 2, and Type 3 task contracts, SQLite state tracking, and a bootstrap flow that can run without my machine.
+        </p>
+        <p>
+          Currently working on: this portfolio, trying to make it a credible record rather than a polished demo. The next thing I want to figure out is how to make agent skills configurable enough that they can adapt to different users without becoming fragile.
+        </p>
+
+        <ul class="links-list" aria-label="links">
+          <li>
+            <a href="https://github.com/fancydirty" target="_blank" rel="noreferrer">GitHub</a>
+          </li>
+          <li>
+            <a href="https://github.com/fancydirty/clawd-media-track" target="_blank" rel="noreferrer">
+              clawd-media-track
+            </a>
+          </li>
+          <li>
+            <span>contact@zhoule.dev</span>
+          </li>
+        </ul>
+      </section>
+    </section>
+
+    <footer class="site-footer">
+      <p>
+        This site is intentionally small. The goal is to show real systems, modestly and
+        clearly.
+      </p>
+    </footer>
+  </main>
 </Layout>
