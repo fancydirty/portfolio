@@ -89,26 +89,27 @@ The first view of each row should stay compact:
 
 Clicking a row should expand an inline detail panel below it.
 
-Each expanded panel should use the same internal structure:
+Each expanded panel should use the same internal structure, but in a more concrete case-study shape:
 
-- Problem
+- Context
+- Challenge
 - System Shape
-- What It Automates
-- Why It Matters
+- Design Decisions
+- Outcome
 
-This makes the three projects easy to compare without forcing identical business contexts.
+This is more specific than the earlier "problem / system shape / why it matters" framing. The main risk with these projects is not lack of substance, but lack of visible context. This structure fixes that.
 
 ### Project 1: clawd-media-track
 
 This project is public and can be named directly.
 
-The detail panel should communicate:
+Its expanded case study should communicate:
 
-- it is an OpenClaw-facing skill
-- it helps an agent acquire and track media resources
-- it separates one-time acquisition, tracking initialization, and scheduled monitoring
-- it includes bootstrap/setup, state tracking, and safety guardrails
-- it has a public GitHub repository
+- Context: an OpenClaw-facing skill for media acquisition and tracking
+- Challenge: avoid turning resource automation into guesswork or risky side effects
+- System Shape: TMDB, PanSou, 115, SQLite, bootstrap, and task routing
+- Design Decisions: separate Type 1 / 2 / 3 work, verify after side effects, add guardrails
+- Outcome: a public repository with real workflow validation
 
 This project should be the clearest and most concrete entry because it is verifiable.
 
@@ -116,13 +117,13 @@ This project should be the clearest and most concrete entry because it is verifi
 
 This project should stay anonymous.
 
-Its description should still communicate real technical substance:
+Its expanded case study should communicate:
 
-- it is an internal workflow automation system
-- it is highly decoupled
-- it runs unattended after setup
-- it has remained stable in production-like use over time
-- it improved a real operational workflow for a non-public user context
+- Context: a recurring internal business workflow with repeated manual handling
+- Challenge: the original process depended on fragile handoffs and too much human repetition
+- System Shape: a decoupled automation pipeline with clear stage boundaries
+- Design Decisions: shape the system for unattended operation, operational checks, and long-running reliability
+- Outcome: a workflow that can be launched and then left to run with low-touch oversight
 
 Do not mention who it serves. Do not mention the exact external services. Do not mention family context.
 
@@ -132,14 +133,39 @@ The point is to show workflow design, reliability, and operational thinking.
 
 This project should also stay anonymous.
 
-Its detail panel should communicate:
+Its expanded case study should communicate:
 
-- it is not just a website
-- it is a system for content generation, quality control, and distribution
-- it uses ledgers, QA checks, and orchestration steps
-- it is designed to keep running with minimal supervision
+- Context: a long-running content production and distribution workflow
+- Challenge: generation alone is easy; the hard part is consistency, QA, and state across the full pipeline
+- System Shape: website surface plus orchestration, ledgers, QA checks, and publishing/distribution steps
+- Design Decisions: treat quality gates and state updates as first-class workflow steps
+- Outcome: an end-to-end system that can keep producing and distributing with minimal supervision
 
 The focus should be on system shape, not on the brand or subject matter behind the content.
+
+## Self-Introduction
+
+The site currently risks talking only about systems and not about the person behind them. A portfolio still needs a small answer to "Who is this?"
+
+The intro should not be a long biography. It should do three things:
+
+1. say what kind of builder the user is becoming
+2. state what kinds of problems the user is drawn to
+3. explain why the project mix looks the way it does
+
+Recommended shape:
+
+- one short role line
+- one short paragraph about current interests
+- one short paragraph that frames the work
+
+Good topics for that framing paragraph:
+
+- these projects are not mass-market products, and that is okay
+- the user is interested in how agents lower the cost of shaping software around a real workflow
+- the goal is not to claim a grand theory of the future, but to explain why these projects are concrete and worth showing
+
+The intro should make the user feel present and legible without becoming self-promotional.
 
 ## Section 3: How I Work
 
