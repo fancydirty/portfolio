@@ -1,0 +1,172 @@
+---
+import type { Project } from "../data/projects";
+import WorkflowDiagram from "./WorkflowDiagram.astro";
+import YTPipelineDiagram from "./YTPipelineDiagram.astro";
+import GeoBwsDiagram from "./GeoBwsDiagram.astro";
+
+type Props = {
+  projects: Project[];
+};
+
+const { projects } = Astro.props;
+---
+
+<section class="section work-section" aria-labelledby="work-heading">
+  <div class="work-shell">
+    <aside class="work-index" aria-labelledby="work-heading">
+      <p class="eyebrow work-index-label">Index // Selected Work</p>
+      <h2 id="work-heading">A small set of systems that show how I think.</h2>
+
+      <div class="work-index-list" role="tablist" aria-label="selected work">
+        {
+          projects.map((project, index) => (
+            <button
+              class={`work-index-item ${index === 0 ? "is-active" : ""}`}
+              type="button"
+              role="tab"
+              aria-selected={index === 0 ? "true" : "false"}
+              data-project-tab
+              data-project-id={project.id}
+            >
+              <span class="work-index-number">[{String(index + 1).padStart(2, "0")}]</span>
+              <span class="work-index-copy">
+                <strong>{project.title}</strong>
+                <span>{project.summary}</span>
+              </span>
+            </button>
+          ))
+        }
+      </div>
+    </aside>
+
+    <div class="dossier-stack">
+      {
+        projects.map((project, index) => (
+          <article
+            class={`dossier-panel ${index === 0 ? "is-active" : "is-hidden"}`}
+            data-project-panel
+            data-project-id={project.id}
+            hidden={index === 0 ? undefined : true}
+          >
+            <div class="dossier-header">
+              <p class="eyebrow">Dossier</p>
+              <h3>{project.title}</h3>
+              <ul class="tag-list" aria-label={`${project.title} tags`}>
+                {project.tags.map((tag) => (
+                  <li>{tag}</li>
+                ))}
+              </ul>
+            </div>
+
+            {project.hasDiagram && (
+              <>
+                <div class="workflow-diagram-wrapper" tabindex="0" role="button" aria-label="Expand diagram" data-project-id={project.id}>
+                  {project.id === "clawd-media-track" && <WorkflowDiagram />}
+                  {project.id === "private-enterprise-workflow" && <YTPipelineDiagram />}
+                  {project.id === "private-content-pipeline" && <GeoBwsDiagram />}
+                  <span class="diagram-hint">Click to expand</span>
+                </div>
+                <dialog id={`diagram-modal-${project.id}`} class="diagram-modal" aria-labelledby={project.id === "clawd-media-track" ? "workflow-title" : project.id === "private-enterprise-workflow" ? "yt-title" : "geo-title"}>
+                  <form method="dialog">
+                    <button class="modal-close">&times; Close</button>
+                  </form>
+                  <div class="modal-content">
+                    {project.id === "clawd-media-track" && <WorkflowDiagram />}
+                    {project.id === "private-enterprise-workflow" && <YTPipelineDiagram />}
+                    {project.id === "private-content-pipeline" && <GeoBwsDiagram />}
+                  </div>
+                </dialog>
+              </>
+            )}
+
+            <div class="dossier-grid dossier-grid-single">
+              <section class="dossier-cell">
+                <p class="dossier-label">What it is</p>
+                <p>{project.whatItIs}</p>
+              </section>
+
+              <section class="dossier-cell">
+                <p class="dossier-label">Inputs and outputs</p>
+                <p>{project.inputsOutputs}</p>
+              </section>
+
+              <section class="dossier-cell">
+                <p class="dossier-label">What made it hard</p>
+                <p>{project.whatMadeItHard}</p>
+              </section>
+
+              <section class="dossier-cell">
+                <p class="dossier-label">What I decided</p>
+                <p>{project.whatIDecided}</p>
+              </section>
+
+              <section class="dossier-cell dossier-cell-wide">
+                <p class="dossier-label">What changed</p>
+                <p>{project.whatChanged}</p>
+
+                {
+                  project.link && (
+                    <p class="project-link-row">
+                      <a href={project.link} target="_blank" rel="noreferrer">
+                        View repository
+                      </a>
+                    </p>
+                  )
+                }
+              </section>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  const tabs = Array.from(document.querySelectorAll("[data-project-tab]"));
+  const panels = Array.from(document.querySelectorAll("[data-project-panel]"));
+
+  panels.forEach((panel) => panel.removeAttribute("hidden"));
+
+  const activateProject = (projectId) => {
+    tabs.forEach((tab) => {
+      const active = tab.dataset.projectId === projectId;
+      tab.classList.toggle("is-active", active);
+      tab.setAttribute("aria-selected", active ? "true" : "false");
+    });
+
+    panels.forEach((panel) => {
+      const active = panel.dataset.projectId === projectId;
+      panel.classList.toggle("is-active", active);
+      panel.classList.toggle("is-hidden", !active);
+    });
+  };
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      activateProject(tab.dataset.projectId);
+    });
+  });
+
+  document.querySelectorAll(".workflow-diagram-wrapper").forEach((wrapper) => {
+    wrapper.addEventListener("click", () => {
+      const modal = document.getElementById(`diagram-modal-${wrapper.dataset.projectId}`);
+      if (modal) modal.showModal();
+    });
+
+    wrapper.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        wrapper.click();
+      }
+    });
+  });
+
+  document.querySelectorAll(".diagram-modal").forEach((dialog) => {
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) {
+        dialog.close();
+      }
+    });
+  });
+</script>
