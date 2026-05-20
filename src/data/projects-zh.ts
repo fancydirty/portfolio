@@ -9,10 +9,30 @@ export type Project = {
   whatIDecided: string;
   whatChanged: string;
   link?: string;
+  liveLink?: string;
   hasDiagram?: boolean;
 };
 
 export const projects: Project[] = [
+  {
+    id: "adk-agent",
+    title: "adk-agent",
+    summary:
+      "一个私有的网页端候选人代表 Agent，用真实项目证据替我回答招聘沟通中的问题。",
+    tags: ["Google ADK", "Recruiting Agent", "SSE"],
+    whatItIs:
+      "这是一个围绕 Google ADK 搭建的私有候选人代表 Agent。它不是从第三人称角度介绍我的简历机器人，而是被设计成在招聘沟通里替我发言：读取我的结构化资料、简历资产、镜像项目、GitNexus 代码情报、文档工具、图像分析和招聘场景技能，用证据支撑回答。",
+    inputsOutputs:
+      "输入可以是一条招聘方消息，也可以包含职位描述、截图或文档上传。系统会结合我的资料、简历资产和只读项目镜像，由后端完成请求校验、会话状态保存、ADK 根 Agent 调用、MCP 与函数工具调用，并通过 SSE 把回答流式返回。输出可以是岗位匹配分析、项目解释、文件分析，或者简历下载链接。",
+    whatMadeItHard:
+      "难点是把一个个人演示变成真正可用的网页 Agent 产品面。它需要匿名用户隔离、上传校验、配额和滥用控制、可恢复的流式输出、按边界记录的生产日志和工具护栏，同时又不能把 Agent 检索证据、自然回答的能力锁死。",
+    whatIDecided:
+      "我没有把 ADK 运行时直接暴露给前端，而是在它前面放了一个 FastAPI 业务网关。这样，会话归属、匿名限制、Turnstile、文件处理、流恢复和简历分发都被收进产品边界；ADK 则专注于推理、工具调用和综合回答。",
+    whatChanged:
+      "最后它不再只是本地 ADK 实验，而是一个能跑的私有 Agent 产品：Next.js assistant-ui 前端、Railway 上的 FastAPI/ADK 后端、只读仓库情报、支持上传的聊天、持久会话状态，以及长流式运行时的恢复逻辑。",
+    liveLink: "https://agent.dirtyfancy.sbs",
+    hasDiagram: true,
+  },
   {
     id: "clawd-media-track",
     title: "clawd-media-track",

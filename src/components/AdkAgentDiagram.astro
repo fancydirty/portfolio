@@ -1,0 +1,103 @@
+---
+// adk-agent system diagram for the WorkDossier section.
+---
+
+<svg
+  viewBox="0 0 800 520"
+  width="100%"
+  preserveAspectRatio="xMidYMid meet"
+  role="img"
+  aria-labelledby="adk-title adk-desc"
+  xmlns="http://www.w3.org/2000/svg"
+  style="display: block; max-width: 100%;"
+>
+  <title id="adk-title">adk-agent system</title>
+  <desc id="adk-desc">Architecture diagram showing recruiter chat flowing through a Next frontend, FastAPI gateway, ADK runner, tools, storage, and resumable stream replay.</desc>
+
+  <defs>
+    <filter id="adk-shadow" x="-2%" y="-2%" width="104%" height="104%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#34302c" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="520" fill="#faf7f1" rx="4"/>
+
+  <text
+    x="400"
+    y="28"
+    text-anchor="middle"
+    style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; fill: #9f4b16; letter-spacing: 0.05em;"
+  >
+    adk-agent system
+  </text>
+
+  <rect x="55" y="70" width="160" height="54" rx="8" fill="#f5efe6" stroke="#9f4b16" stroke-width="1.5" filter="url(#adk-shadow)"/>
+  <text x="135" y="92" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; fill: #34302c;">Recruiter Browser</text>
+  <text x="135" y="108" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 8px; fill: #6f675f;">chat / upload / resume</text>
+
+  <rect x="300" y="70" width="170" height="54" rx="8" fill="#f5efe6" stroke="#9f4b16" stroke-width="1.5" filter="url(#adk-shadow)"/>
+  <text x="385" y="92" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; fill: #34302c;">Next.js Frontend</text>
+  <text x="385" y="108" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 8px; fill: #6f675f;">assistant-ui surface</text>
+
+  <rect x="585" y="70" width="160" height="54" rx="8" fill="#f5efe6" stroke="#9f4b16" stroke-width="1.5" filter="url(#adk-shadow)"/>
+  <text x="665" y="92" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; fill: #34302c;">FastAPI Gateway</text>
+  <text x="665" y="108" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 8px; fill: #6f675f;">auth / limits / files</text>
+
+  <rect x="300" y="185" width="200" height="64" rx="12" fill="#faf7f1" stroke="#34302c" stroke-width="2" filter="url(#adk-shadow)"/>
+  <text x="400" y="210" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; fill: #34302c;">ADK Root Agent</text>
+  <text x="400" y="228" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 8px; fill: #6f675f;">representative reasoning layer</text>
+
+  <rect x="60" y="300" width="150" height="48" rx="8" fill="#f1ece4" stroke="#34302c" stroke-width="1.25"/>
+  <text x="135" y="320" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; fill: #34302c;">Profile + Resume</text>
+  <text x="135" y="334" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 8px; fill: #6f675f;">candidate facts</text>
+
+  <rect x="240" y="300" width="150" height="48" rx="8" fill="#f1ece4" stroke="#34302c" stroke-width="1.25"/>
+  <text x="315" y="320" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; fill: #34302c;">GitNexus + MCP</text>
+  <text x="315" y="334" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 8px; fill: #6f675f;">repo evidence</text>
+
+  <rect x="420" y="300" width="150" height="48" rx="8" fill="#f1ece4" stroke="#34302c" stroke-width="1.25"/>
+  <text x="495" y="320" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; fill: #34302c;">Document Tools</text>
+  <text x="495" y="334" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 8px; fill: #6f675f;">PDF / DOCX / vision</text>
+
+  <rect x="600" y="300" width="150" height="48" rx="8" fill="#f1ece4" stroke="#34302c" stroke-width="1.25"/>
+  <text x="675" y="320" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; fill: #34302c;">Skill Toolsets</text>
+  <text x="675" y="334" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 8px; fill: #6f675f;">recruit / strategy</text>
+
+  <rect x="210" y="415" width="180" height="54" rx="10" fill="#faf7f1" stroke="#9f4b16" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <text x="300" y="437" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; fill: #9f4b16;">Business State</text>
+  <text x="300" y="452" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 8px; fill: #34302c;">sessions / quotas / uploads</text>
+
+  <rect x="430" y="415" width="180" height="54" rx="10" fill="#faf7f1" stroke="#9f4b16" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <text x="520" y="437" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; fill: #9f4b16;">Stream Replay</text>
+  <text x="520" y="452" text-anchor="middle" style="font-family: 'JetBrains Mono', monospace; font-size: 8px; fill: #34302c;">event ids / recovery</text>
+
+  <line x1="215" y1="97" x2="300" y2="97" stroke="#34302c" stroke-width="1.5"/>
+  <polygon points="300,97 294,93 294,101" fill="#34302c"/>
+
+  <line x1="470" y1="97" x2="585" y2="97" stroke="#34302c" stroke-width="1.5"/>
+  <polygon points="585,97 579,93 579,101" fill="#34302c"/>
+
+  <polyline points="665,124 665,160 400,160 400,185" fill="none" stroke="#34302c" stroke-width="1.5"/>
+  <polygon points="400,185 396,179 404,179" fill="#34302c"/>
+
+  <line x1="400" y1="249" x2="400" y2="282" stroke="#34302c" stroke-width="1.5"/>
+  <polygon points="400,282 396,276 404,276" fill="#34302c"/>
+
+  <polyline points="400,282 135,282 135,300" fill="none" stroke="#34302c" stroke-width="1.2"/>
+  <polygon points="135,300 131,294 139,294" fill="#34302c"/>
+
+  <polyline points="400,282 315,282 315,300" fill="none" stroke="#34302c" stroke-width="1.2"/>
+  <polygon points="315,300 311,294 319,294" fill="#34302c"/>
+
+  <polyline points="400,282 495,282 495,300" fill="none" stroke="#34302c" stroke-width="1.2"/>
+  <polygon points="495,300 491,294 499,294" fill="#34302c"/>
+
+  <polyline points="400,282 675,282 675,300" fill="none" stroke="#34302c" stroke-width="1.2"/>
+  <polygon points="675,300 671,294 679,294" fill="#34302c"/>
+
+  <polyline points="665,124 665,390 300,390 300,415" fill="none" stroke="#d8d0c5" stroke-width="1.4" stroke-dasharray="4,3"/>
+  <polygon points="300,415 296,409 304,409" fill="#d8d0c5"/>
+
+  <polyline points="665,124 665,390 520,390 520,415" fill="none" stroke="#d8d0c5" stroke-width="1.4" stroke-dasharray="4,3"/>
+  <polygon points="520,415 516,409 524,409" fill="#d8d0c5"/>
+</svg>

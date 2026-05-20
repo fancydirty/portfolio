@@ -1,5 +1,6 @@
 ---
 import type { Project } from "../data/projects-zh";
+import AdkAgentDiagram from "./AdkAgentDiagram.astro";
 import WorkflowDiagram from "./WorkflowDiagram.astro";
 import YTPipelineDiagram from "./YTPipelineDiagram.astro";
 import GeoBwsDiagram from "./GeoBwsDiagram.astro";
@@ -9,6 +10,13 @@ type Props = {
 };
 
 const { projects } = Astro.props;
+
+const diagramTitleIds: Record<string, string> = {
+  "adk-agent": "adk-title",
+  "clawd-media-track": "workflow-title",
+  "private-enterprise-workflow": "yt-title",
+  "private-content-pipeline": "geo-title",
+};
 ---
 
 <section class="section work-section" aria-labelledby="work-heading">
@@ -61,6 +69,7 @@ const { projects } = Astro.props;
             {project.hasDiagram && (
               <>
                 <div class="workflow-diagram-wrapper" tabindex="0" role="button" aria-label="放大图表" data-project-id={project.id}>
+                  {project.id === "adk-agent" && <AdkAgentDiagram />}
                   {project.id === "clawd-media-track" && <WorkflowDiagram />}
                   {project.id === "private-enterprise-workflow" && <YTPipelineDiagram />}
                   {project.id === "private-content-pipeline" && <GeoBwsDiagram />}
@@ -72,11 +81,12 @@ const { projects } = Astro.props;
                   点击放大
                 </span>
                 </div>
-                <dialog id={`diagram-modal-${project.id}`} class="diagram-modal" aria-labelledby={project.id === "clawd-media-track" ? "workflow-title" : project.id === "private-enterprise-workflow" ? "yt-title" : "geo-title"}>
+                <dialog id={`diagram-modal-${project.id}`} class="diagram-modal" aria-labelledby={diagramTitleIds[project.id]}>
                   <form method="dialog">
                     <button class="modal-close">&times; 关闭</button>
                   </form>
                   <div class="modal-content">
+                    {project.id === "adk-agent" && <AdkAgentDiagram />}
                     {project.id === "clawd-media-track" && <WorkflowDiagram />}
                     {project.id === "private-enterprise-workflow" && <YTPipelineDiagram />}
                     {project.id === "private-content-pipeline" && <GeoBwsDiagram />}
@@ -109,6 +119,16 @@ const { projects } = Astro.props;
               <section class="dossier-cell dossier-cell-wide">
                 <p class="dossier-label">带来的改变</p>
                 <p>{project.whatChanged}</p>
+
+                {
+                  project.liveLink && (
+                    <p class="project-link-row">
+                      <a href={project.liveLink} target="_blank" rel="noreferrer">
+                        打开 Agent
+                      </a>
+                    </p>
+                  )
+                }
 
                 {
                   project.link && (

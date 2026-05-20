@@ -9,10 +9,30 @@ export type Project = {
   whatIDecided: string;
   whatChanged: string;
   link?: string;
+  liveLink?: string;
   hasDiagram?: boolean;
 };
 
 export const projects: Project[] = [
+  {
+    id: "adk-agent",
+    title: "adk-agent",
+    summary:
+      "A private web-based representative agent that speaks for me in recruiting conversations using live project evidence.",
+    tags: ["Google ADK", "Recruiting Agent", "SSE"],
+    whatItIs:
+      "A private candidate representative agent built around Google ADK. It is not a resume chatbot that talks about me from a distance; it is designed to answer recruiters as my representative, using profile data, mirrored repositories, GitNexus code intelligence, document tools, image analysis, and recruiter-specific skills to ground its answers in evidence.",
+    inputsOutputs:
+      "The system starts with a recruiter message, optional uploads such as job descriptions or screenshots, my structured profile, resume assets, and read-only mirrors of my projects. The backend validates the request, stores session state, runs the ADK root agent with MCP and function tools, streams the answer back through SSE, and can return fit analysis, project explanations, file analysis, or a resume download link.",
+    whatMadeItHard:
+      "The hard part was turning a personal demo into a real web agent surface. It needed anonymous user isolation, upload validation, quota and abuse controls, resumable streaming, production logging by boundary, and tool guardrails, while still preserving the agent's ability to inspect evidence and answer naturally.",
+    whatIDecided:
+      "I put a FastAPI business gateway in front of ADK instead of exposing the agent runtime directly. That made session ownership, anonymous restrictions, Turnstile challenges, file handling, stream replay, and resume delivery part of the product boundary, while ADK stayed focused on reasoning, tools, and synthesis.",
+    whatChanged:
+      "The result is a working private agent product rather than a local ADK experiment: a Next.js assistant-ui frontend, a Railway-hosted FastAPI/ADK backend, read-only repo intelligence, upload-aware chat, persistent session state, and recovery logic for long streaming runs.",
+    liveLink: "https://agent.dirtyfancy.sbs",
+    hasDiagram: true,
+  },
   {
     id: "clawd-media-track",
     title: "clawd-media-track",

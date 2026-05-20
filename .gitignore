@@ -27,3 +27,4 @@ pnpm-debug.log*
 *.bak
 preview.log
 screenshot-*.png
+.vercel

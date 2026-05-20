@@ -7,8 +7,8 @@ import avatar from "../assets/avatar.png";
 ---
 
 <Layout
-  title="作品集 | 实用 Agent 工作流"
-  description="一个聚焦于实用 Agent 工作流、长期自动化系统与谨慎执行的单页作品集。"
+  title="作品集 | Agent 产品工程"
+  description="一个关于把 Agent 工作流做成可用网页产品面的单页作品集，关注网关边界、状态、流恢复和长期自动化。"
   lang="zh"
 >
   <main class="page-shell">
@@ -22,16 +22,21 @@ import avatar from "../assets/avatar.png";
 
     <section class="hero" aria-labelledby="hero-heading">
       <p class="hero-kicker">你好，我是周乐。</p>
-      <h1 id="hero-heading">我搭建的<br class="hero-br" />Agent 工作流，<br class="hero-br" />不止于演示环境。</h1>
+      <h1 id="hero-heading">我搭建能越过 demo 边界的 Agent 工作流。</h1>
       <p class="hero-lead">
-        这里是我做 AI 工具、写 Agent 和搭自动化流程时留下的记录。
+        最新的一个，是放在公网的求职 Web Agent。它会基于我的资料、项目、工具、上传内容、会话历史和生产网关，替我回答招聘沟通里的问题。
       </p>
       <p class="hero-supporting">
-        刚入门不久，但我更关心系统能不能在跑通一次之后，还能长期稳定地跑下去；能不能在崩溃后自己接上上下文，而不是从头再来。
+        现在做出一个会聊天的 Agent 已经不难。真正的难点在它周围：网关边界、状态、流恢复、工具隔离、延迟、部署，以及真实用户聊完之后留下的反馈。
       </p>
       <p class="status-line">
         <span class="status-dot" aria-hidden="true"></span>
-        记录真实工作，不是经营人设。
+        当前关注：Agent 产品工程，而不只是 Agent prompt。
+      </p>
+      <p class="hero-link-row">
+        <a href="https://agent.dirtyfancy.sbs" target="_blank" rel="noreferrer">
+          和我的 Web Agent 聊聊
+        </a>
       </p>
     </section>
 
@@ -45,7 +50,8 @@ import avatar from "../assets/avatar.png";
               alt="周乐肖像"
               width={144}
               height={144}
-              loading="lazy"
+              loading="eager"
+              fetchpriority="high"
             />
           </div>
           <div class="profile-card-copy">
@@ -53,7 +59,7 @@ import avatar from "../assets/avatar.png";
             <dl class="profile-card-facts">
               <div class="profile-card-fact">
                 <dt>Focus</dt>
-                <dd>Agent 工作流</dd>
+                <dd>Agent 产品工程</dd>
               </div>
               <div class="profile-card-fact">
                 <dt>Background</dt>
@@ -61,7 +67,7 @@ import avatar from "../assets/avatar.png";
               </div>
               <div class="profile-card-fact">
                 <dt>Tools</dt>
-                <dd>Codex, Opencode, OpenClaw</dd>
+                <dd>Codex, Opencode, OpenClaw, ADK</dd>
               </div>
               <div class="profile-card-fact">
                 <dt>GitHub</dt>
@@ -104,12 +110,12 @@ import avatar from "../assets/avatar.png";
 
         <div class="about-bridge-copy">
         <p class="eyebrow">About Me</p>
-        <h2 id="about-heading">从语言学到系统搭建，我在做中学。</h2>
+        <h2 id="about-heading">从语言、自动化，到可被陌生人使用的 Agent，我在实战里学。</h2>
         <p>
-          电子科大翻译硕士。做 Agent 之前，我做了很多年和文字打交道的事。这段经历让我对两件事特别较真：表达够不够准，结构清不清楚，别人能不能一眼看明白。
+          电子科大翻译硕士。做 Agent 之前，我做了很多年和文字打交道的事。这段经历仍然影响我搭系统的方式：表达要准，结构要清楚，别人要能看懂系统正在做什么。
         </p>
         <p>
-          过去一年，我把这套习惯搬到了 AI 工具、Agent 编程和自动化上。我的学习方式是：先搭一个能长期跑的系统，观察它会在哪里跑偏，再一点点收紧状态、检查和护栏，直到它稳下来。最常用的工具是 Codex、Opencode 和 OpenClaw。
+          过去一年，我把这套习惯搬到了 AI 工具、Agent 编程和自动化上。最近的变化是：项目从私有自动化、内容管道，走到了一个面向真实用户的求职 Web Agent。现在我关心的问题更具体了：谁来持有会话，什么东西挡在 runtime 前面，流式输出怎么恢复，Agent 回答前应该使用哪些证据。最常用的工具是 Codex、Opencode、OpenClaw 和 ADK。
         </p>
         </div>
       </div>
@@ -122,24 +128,25 @@ import avatar from "../assets/avatar.png";
         <p class="eyebrow">Operating Principles</p>
         <h2 id="principles-heading">工作教会我的事。</h2>
         <p class="principles-lead">
-          我一度以为 Agent 工作流最难的是写更好的 prompt。搭了三个系统之后才发现，真正的难点是怎么为那些你根本想不到的失败场景做设计。下面是我反复踩到的几条规律。
+          我一度以为 Agent 工作流最难的是写更好的 prompt。做完四个系统，尤其是把求职 Agent 放到公网之后，我现在更确定一件事：懂 Agent 框架，和做出一个陌生人能安全使用的 Agent 产品面，中间隔着一整段工程路。
         </p>
         <ul class="principles-list">
-          <li><strong>"差不多能用"是最贵的状态。</strong>报错明显的系统修起来很快；可怕的是那种悄无声息的失败——比如明明少了一集却看起来完整的季度，或者转错目录的文件。这种问题的成本会指数级增长。所以我做设计时，优先让错误尽快暴露出来。</li>
-          <li><strong>状态不能只在内存里活着。</strong>如果 Agent 崩了之后不能从断点继续跑，说明状态放错了地方。这个教训在我做过的每个项目里都成立，不管是内容管道、媒体追踪还是长期运行的内部运维。</li>
-          <li><strong>边界清晰比循环聪明更重要。</strong>一个精巧的循环在碰到边界情况之前总是看起来很优雅。我宁可拆成三个各司其职的简单契约，也不要一个试图把所有事都包办的聪明循环。</li>
-          <li><strong>系统得学会说"不"。</strong>如果一个工作流每次都必须给出一个结果，那它早晚会给出垃圾结果。我会显式地设计"这个我还做不到"的状态，因为诚实承认失败，比默默给出一个错误结果要便宜得多。</li>
+          <li><strong>框架让 demo 变便宜。</strong>ADK 能很快给你一个有状态、能调用工具的 Agent。这很好，但那只是起点。真正麻烦的是陌生用户、上传文件、恶意流量、慢工具和断掉的流。</li>
+          <li><strong>网关就是 Agent 的产品边界。</strong>我不想把整个 ADK runtime 直接暴露给互联网。业务网关要负责匿名会话、文件校验、滥用控制、简历分发、流恢复，以及公网流量和私有工具之间的边界。</li>
+          <li><strong>状态必须活过刷新和崩溃。</strong>用户刷新页面，或者长流式输出抖了一下，系统也应该知道他是谁、之前发生了什么。这个原则在媒体追踪、内部运营、内容管道和 Web Agent 里都成立。</li>
+          <li><strong>延迟不是小问题，是体验本身。</strong>首 token 慢不慢，会直接改变 Agent 有没有“活着”的感觉。把 MCP 启动移出热路径、让工具保持预热，和 prompt 本身一样影响用户体验。</li>
+          <li><strong>证据比流畅更重要。</strong>Agent 应该基于 profile、项目记录、上传上下文和工具结果来回答。答案说得漂亮还不够，系统必须知道自己的判断从哪里来。</li>
         </ul>
       </section>
 
       <section class="now-panel" aria-labelledby="now-heading">
         <p class="eyebrow">Now</p>
-        <h2 id="now-heading">公开重建，一步一个脚印。</h2>
+        <h2 id="now-heading">现在我在研究 Agent runtime 和产品外壳之间的边界。</h2>
         <p>
-          最近在琢磨一个问题：Agent 技能要足够有主见才能真的跑起来，但又得足够灵活才能在别人的机器上活下去。
+          当前的测试场景是求职代表 Agent。它需要和陌生人对话，记住会话，接收上下文，使用我的项目证据，并把有价值的沟通记录留下来，方便我之后复盘。
         </p>
         <p>
-          大多数开源 Agent 工具都偏向一边——要么太死板，换个环境就挂；要么太松散，本质上只是多了几步的 prompt。我还没找到那个平衡点。下一个项目，我想专门做做这个实验。
+          Agent 本身已经不是唯一有意思的部分。围绕它的产品边界同样重要：网关设计、流式体验、滥用控制、可观测性，以及那些让公网 Agent 从实验感变成稳定感的小修小补。
         </p>
 
         <ul class="links-list" aria-label="联系方式">

@@ -7,8 +7,8 @@ import avatar from "../assets/avatar.png";
 ---
 
 <Layout
-  title="Portfolio | Practical Agent Workflows"
-  description="A single-page portfolio focused on practical agent workflows, long-running automation systems, and careful execution."
+  title="Portfolio | Agent Product Engineering"
+  description="A single-page portfolio about shipping agent workflows into usable web surfaces, with gateway boundaries, state, streaming recovery, and long-running automation."
   lang="en"
 >
   <main class="page-shell">
@@ -21,18 +21,24 @@ import avatar from "../assets/avatar.png";
     </div>
     <section class="hero" aria-labelledby="hero-heading">
       <p class="hero-kicker">Hi, I am Zhou Le.</p>
-      <h1 id="hero-heading">I build agent workflows that already run outside the demo.</h1>
+      <h1 id="hero-heading">I build agent workflows that survive the edge between demo and product.</h1>
       <p class="hero-lead">
-        This site is a small record of systems I have built while learning AI tooling, coding
-        agents, and workflow automation through practice.
+        The newest one is a web agent that speaks for me in recruiting conversations, backed by my
+        profile, projects, tools, uploads, session history, and a production gateway.
       </p>
       <p class="hero-supporting">
-        I am still early in this work, but I care most about systems that keep their state,
-        recover context, and stay useful after the first successful run.
+        Frameworks make the first agent cheap. My work starts where the demo stops: gateway
+        boundaries, state, stream recovery, tool isolation, latency, deployment, and feedback from
+        people who actually use it.
       </p>
       <p class="status-line">
         <span class="status-dot" aria-hidden="true"></span>
-        A small record of real work, not a personal brand exercise.
+        Focused on agent product engineering, not just agent prompts.
+      </p>
+      <p class="hero-link-row">
+        <a href="https://agent.dirtyfancy.sbs" target="_blank" rel="noreferrer">
+          Talk to my web agent
+        </a>
       </p>
     </section>
 
@@ -46,7 +52,8 @@ import avatar from "../assets/avatar.png";
               alt="Portrait of Zhou Le"
               width={144}
               height={144}
-              loading="lazy"
+              loading="eager"
+              fetchpriority="high"
             />
           </div>
           <div class="profile-card-copy">
@@ -54,7 +61,7 @@ import avatar from "../assets/avatar.png";
             <dl class="profile-card-facts">
               <div class="profile-card-fact">
                 <dt>Focus</dt>
-                <dd>Agent workflows</dd>
+                <dd>Agent product engineering</dd>
               </div>
               <div class="profile-card-fact">
                 <dt>Background</dt>
@@ -62,7 +69,7 @@ import avatar from "../assets/avatar.png";
               </div>
               <div class="profile-card-fact">
                 <dt>Tools</dt>
-                <dd>Codex, Opencode, OpenClaw</dd>
+                <dd>Codex, Opencode, OpenClaw, ADK</dd>
               </div>
               <div class="profile-card-fact">
                 <dt>GitHub</dt>
@@ -105,19 +112,20 @@ import avatar from "../assets/avatar.png";
 
         <div class="about-bridge-copy">
         <p class="eyebrow">About Me</p>
-        <h2 id="about-heading">I came to systems work through language, and I am learning it by building.</h2>
+        <h2 id="about-heading">I came through language, learned by building, and now focus on agents people can actually use.</h2>
         <p>
           I hold a master's degree in translation from UESTC. Before I started building agent
-          workflows, I spent years working with language and content. That background made me care
-          about precision, structure, and whether something still makes sense once another person
-          has to pick it up.
+          workflows, I spent years working with language and content. That background still shapes
+          how I build: I care about precision, structure, and whether another person can understand
+          what the system is doing.
         </p>
         <p>
           Over the last year, I have turned that same habit toward AI tooling, coding agents, and
-          workflow automation. I learn by building systems that need to keep running, seeing where
-          they drift, and then tightening the state, checks, and guardrails until they behave
-          better. Codex, Opencode, and OpenClaw are the tools I return to most. The projects below
-          are the clearest record of that shift so far.
+          workflow automation. The work has moved from private automation and content pipelines to
+          a recruiting web agent exposed to real users. I still learn by building, but the questions
+          are sharper now: who owns the session, what protects the runtime, how does streaming
+          recover, and what evidence should the agent use before it answers? Codex, Opencode,
+          OpenClaw, and ADK are the tools I return to most.
         </p>
         </div>
       </div>
@@ -130,24 +138,29 @@ import avatar from "../assets/avatar.png";
         <p class="eyebrow">Operating Principles</p>
         <h2 id="principles-heading">What the work has taught me so far.</h2>
         <p class="principles-lead">
-          I used to think the hard part of agent workflows was writing better prompts. After three systems, I realized the hard part is designing for failures you cannot fully predict. These are the patterns that keep showing up.
+          I used to think the hard part of agent workflows was writing better prompts. After four systems, including a public-facing recruiting agent, I think the harder line is clearer: knowing an agent framework is different from shipping an agent surface that strangers can safely use.
         </p>
         <ul class="principles-list">
-          <li><strong>"Almost working" is the most expensive state.</strong> A system that fails loudly is cheap to fix. One that fails quietly — a partial season that looks complete, a transferred file in the wrong directory — becomes expensive fast. I design for fast, visible failure.</li>
-          <li><strong>State should outlive the session.</strong> If an agent cannot pick up where it left off after a crash, the state was in the wrong place. This has held true across every project, from content pipelines to media tracking to long-running internal ops.</li>
-          <li><strong>Explicit boundaries beat smart loops.</strong> A single clever loop feels elegant until it meets an edge case. I'd rather have three dumb contracts that each do one thing well than one loop that tries to be smart about everything.</li>
-          <li><strong>The system must be able to refuse.</strong> A workflow that always produces <em>something</em> will eventually produce garbage. I build in explicit "I can't do this yet" states, because honest failure costs less than silent success.</li>
+          <li><strong>Frameworks make demos cheap.</strong> ADK can give you a stateful, tool-calling agent quickly. That is useful, but it is only the starting line. The harder work begins when the agent has to face unknown users, uploads, bad traffic, slow tools, and broken streams.</li>
+          <li><strong>The gateway is part of the agent.</strong> I do not want to expose an agent runtime directly to the internet. The business gateway owns anonymous sessions, file validation, abuse controls, resume delivery, streaming recovery, and the boundary between public traffic and private tools.</li>
+          <li><strong>State should outlive refreshes and crashes.</strong> If a user refreshes the page, or a long run stutters, the system should still know who they are and what already happened. This has held across media tracking, internal ops, content pipelines, and now web agents.</li>
+          <li><strong>Latency is product behavior.</strong> A slow first token changes whether the agent feels alive. Moving MCP startup out of the hot path and keeping tools warm mattered as much as prompt wording, because the user experiences the whole system, not just the model.</li>
+          <li><strong>Evidence beats fluent answers.</strong> The agent should answer from profile data, project records, uploaded context, and tool results. A polished response is not enough if the system cannot show where its judgment came from.</li>
         </ul>
       </section>
 
       <section class="now-panel" aria-labelledby="now-heading">
         <p class="eyebrow">Now</p>
-        <h2 id="now-heading">Rebuilding in public, one step at a time.</h2>
+        <h2 id="now-heading">Working on the boundary between agent runtime and product surface.</h2>
         <p>
-          Right now I'm trying to solve a tension: agent skills need to be opinionated enough to actually work, but configurable enough to survive on someone else's machine.
+          Right now I am using a recruiting representative agent as the test case. It has to speak
+          with strangers, remember sessions, accept context, use my project evidence, and leave
+          useful records for me to review later.
         </p>
         <p>
-          Most open-source agent tools fall on one side or the other — either too rigid to adapt, or so flexible that they become prompts with extra steps. I don't have a clean answer yet. The next thing I build will be an experiment in finding that balance.
+          The agent itself is no longer the only interesting part. The product boundary around it
+          now matters just as much: gateway design, streaming behavior, abuse control, observability,
+          and the small fixes that make a public agent feel steady instead of experimental.
         </p>
 
         <ul class="links-list" aria-label="links">
