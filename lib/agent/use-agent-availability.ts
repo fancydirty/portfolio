@@ -8,17 +8,22 @@ export function useAgentAvailability(): AgentAvailability {
   const [state, setState] = useState<AgentAvailability>("loading");
 
   useEffect(() => {
-    let cancelled = false;
-    fetch("/api/agent/me", { cache: "no-store", credentials: "include" })
+    const controller = new AbortController();
+    fetch("/api/agent/me", {
+      cache: "no-store",
+      credentials: "include",
+      signal: controller.signal,
+    })
       .then((res) => {
-        if (cancelled) return;
         setState(res.ok ? "available" : "unavailable");
       })
-      .catch(() => {
-        if (!cancelled) setState("unavailable");
+      .catch((error: unknown) => {
+        // Ignore the abort that fires on unmount; only real failures degrade.
+        if (error instanceof DOMException && error.name === "AbortError") return;
+        setState("unavailable");
       });
     return () => {
-      cancelled = true;
+      controller.abort();
     };
   }, []);
 

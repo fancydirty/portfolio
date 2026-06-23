@@ -101,6 +101,19 @@ describe("createGatewayAdkStream", () => {
     expect(events[1]!.content?.parts?.[0]?.text).toBe("y");
   });
 
+  it("parses frames delimited by CRLF blank lines", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(
+        'data: {"id":"a","content":{"role":"model","parts":[{"text":"crlf"}]}}\r\n\r\n',
+        { status: 200, headers: { "content-type": "text/event-stream" } },
+      ),
+    );
+    const stream = createGatewayAdkStream({ api: "/api/agent/chat" });
+    const events = await collect(stream(HUMAN, runConfig()));
+    expect(events).toHaveLength(1);
+    expect(events[0]!.content?.parts?.[0]?.text).toBe("crlf");
+  });
+
   it("calls onComplete after a clean stream", async () => {
     vi.spyOn(globalThis, "fetch").mockResolvedValue(
       sseResponse(['data: {"id":"a","content":{"role":"model","parts":[{"text":"x"}]}}']),

@@ -38,7 +38,7 @@ export function AgentThread({ dict }: { dict: Dictionary }) {
             UserMessage: () => (
               <MessagePrimitive.Root className="border-t border-hairline py-4">
                 <p className="font-mono text-xs tracking-[0.18em] text-ink-subtle">
-                  YOU
+                  {dict.agent.userRole}
                 </p>
                 <div className="mt-1 whitespace-pre-wrap text-ink">
                   <MessagePrimitive.Parts />
@@ -48,7 +48,7 @@ export function AgentThread({ dict }: { dict: Dictionary }) {
             AssistantMessage: () => (
               <MessagePrimitive.Root className="border-t border-hairline py-4">
                 <p className="font-mono text-xs tracking-[0.18em] text-ink-subtle">
-                  AGENT
+                  {dict.agent.assistantRole}
                 </p>
                 <div className="mt-1 leading-relaxed text-ink-muted">
                   <MessagePrimitive.Parts components={{ Text: MarkdownText }} />

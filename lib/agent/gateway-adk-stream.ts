@@ -186,7 +186,9 @@ async function* parseSseResponse(
       const { value, done } = await reader.read();
       if (done) break;
 
-      buffer += decoder.decode(value, { stream: true });
+      // Normalize CRLF so frame detection works even if a proxy rewrites
+      // line endings (SSE frames are delimited by a blank line).
+      buffer += decoder.decode(value, { stream: true }).replace(/\r\n/g, "\n");
 
       let boundary = buffer.indexOf("\n\n");
       while (boundary !== -1) {

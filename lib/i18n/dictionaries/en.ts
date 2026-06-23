@@ -67,6 +67,8 @@ const en = {
       "This panel is the live adk-agent backend, not a canned script. Ask it about the architecture or how I'd fit a role.",
     inputPlaceholder: "Ask about a project, a decision, or a role…",
     sendLabel: "Send",
+    userRole: "YOU",
+    assistantRole: "AGENT",
     presets: [
       "Walk me through the Mediary Scout architecture.",
       "Assess my fit for a senior backend role.",
