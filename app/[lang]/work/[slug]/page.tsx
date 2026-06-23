@@ -3,6 +3,7 @@ import { isLocale, locales } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { projects } from "@/lib/content/projects";
 import { CaseStudy } from "@/components/work/case-study";
+import { AgentSection } from "@/components/agent/agent-section";
 
 export function generateStaticParams() {
   return locales.flatMap((lang) => projects.map((p) => ({ lang, slug: p.id })));
@@ -32,6 +33,7 @@ export default async function WorkPage({
   return (
     <main className="mx-auto max-w-3xl px-6 py-16">
       <CaseStudy project={project} lang={lang} work={dict.work} />
+      {project.id === "adk-agent" ? <AgentSection dict={dict} /> : null}
     </main>
   );
 }

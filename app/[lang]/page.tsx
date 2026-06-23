@@ -7,6 +7,7 @@ import { SelectedWork } from "@/components/home/selected-work";
 import { HowIWork } from "@/components/home/how-i-work";
 import { NowSection } from "@/components/home/now-section";
 import { LinksSection } from "@/components/home/links-section";
+import { AgentCta } from "@/components/home/agent-cta";
 
 export default async function LangHome({
   params,
@@ -27,6 +28,7 @@ export default async function LangHome({
 
       <div className="mx-auto max-w-3xl px-6">
         <HowIWork dict={dict} />
+        <AgentCta dict={dict} lang={lang} />
         <NowSection dict={dict} />
         <LinksSection dict={dict} />
       </div>
