@@ -48,7 +48,6 @@ const en = {
     github: "https://github.com/fancydirty",
     email: "fancydirty@gmail.com",
     items: [
-      { label: "GitHub", href: "https://github.com/fancydirty" },
       { label: "LinkedIn", href: "https://www.linkedin.com/in/%E4%B9%90-%E5%91%A8-967660354/" },
       { label: "Bilibili", href: "https://space.bilibili.com/5582337?spm_id_from=333.1007.0.0" },
     ],
