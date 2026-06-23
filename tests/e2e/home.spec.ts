@@ -18,3 +18,18 @@ test("root redirects to a locale", async ({ page }) => {
   await page.goto("/");
   await expect(page).toHaveURL(/\/(en|zh)$/);
 });
+test("root honors Accept-Language (zh → /zh, en → /en)", async ({ browser }) => {
+  // Chromium controls the Accept-Language header itself, so extraHTTPHeaders
+  // won't move it — the context `locale` option is what actually sets it.
+  const zhCtx = await browser.newContext({ locale: "zh-CN" });
+  const zhPage = await zhCtx.newPage();
+  await zhPage.goto("/");
+  await expect(zhPage).toHaveURL(/\/zh$/);
+  await zhCtx.close();
+
+  const enCtx = await browser.newContext({ locale: "en-US" });
+  const enPage = await enCtx.newPage();
+  await enPage.goto("/");
+  await expect(enPage).toHaveURL(/\/en$/);
+  await enCtx.close();
+});

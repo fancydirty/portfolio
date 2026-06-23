@@ -16,7 +16,9 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Routes live under `app/[lang]/`: the bilingual home is `app/[lang]/page.tsx` and case studies are `app/[lang]/work/[slug]/page.tsx`. The root `app/page.tsx` only redirects to a locale (locale selection by `Accept-Language` is handled in `proxy.ts`). The page auto-updates as you edit.
+
+> A fuller project README (architecture, content model, deploy) lands in a later phase.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 

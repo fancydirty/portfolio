@@ -1,6 +1,6 @@
 import { AnimatedDiagram } from "@/components/diagrams/animated-diagram";
 
-const mono = "'JetBrains Mono', monospace";
+const mono = "var(--font-mono), ui-monospace, monospace";
 
 /**
  * adk-agent system architecture (public, owned project).
