@@ -1,8 +1,6 @@
-import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionaries/en";
 
 type Props = {
-  lang: Locale;
   links: Dictionary["links"];
 };
 

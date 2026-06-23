@@ -1,14 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useSyncExternalStore } from "react";
 
 type Labels = { toLight: string; toDark: string };
 
+const listeners = new Set<() => void>();
+
+function subscribe(onChange: () => void) {
+  listeners.add(onChange);
+  return () => {
+    listeners.delete(onChange);
+  };
+}
+
+function getSnapshot() {
+  return document.documentElement.classList.contains("light");
+}
+
+function getServerSnapshot() {
+  return false;
+}
+
 export function ThemeToggle({ labels }: { labels: Labels }) {
-  const [isLight, setIsLight] = useState(() =>
-    typeof document !== "undefined" &&
-    document.documentElement.classList.contains("light")
-  );
+  const isLight = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   function toggle() {
     const next = !isLight;
@@ -18,7 +32,7 @@ export function ThemeToggle({ labels }: { labels: Labels }) {
     } catch {
       // ignore storage failures (private mode, etc.)
     }
-    setIsLight(next);
+    for (const listener of listeners) listener();
   }
 
   return (
