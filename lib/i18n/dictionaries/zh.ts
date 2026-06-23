@@ -15,6 +15,14 @@ const zh: Dictionary = {
   work: {
     eyebrow: "精选作品",
     caseStudy: "案例研究",
+    backToWork: "← 返回",
+    sections: {
+      whatItIs: "是什么",
+      inputsOutputs: "输入与输出",
+      whatMadeItHard: "难在哪",
+      whatIDecided: "我的决策",
+      whatChanged: "带来的改变",
+    },
   },
   howIWork: {
     eyebrow: "我怎么做",

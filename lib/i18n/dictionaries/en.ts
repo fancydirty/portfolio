@@ -13,6 +13,14 @@ const en = {
   work: {
     eyebrow: "SELECTED WORK",
     caseStudy: "case study",
+    backToWork: "← Back",
+    sections: {
+      whatItIs: "What it is",
+      inputsOutputs: "Inputs & outputs",
+      whatMadeItHard: "What made it hard",
+      whatIDecided: "What I decided",
+      whatChanged: "What changed",
+    },
   },
   howIWork: {
     eyebrow: "HOW I WORK",
