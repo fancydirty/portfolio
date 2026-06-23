@@ -60,6 +60,27 @@ const en = {
       { label: "Bilibili", href: "https://space.bilibili.com/5582337?spm_id_from=333.1007.0.0" },
     ],
   },
+  agent: {
+    eyebrow: "TALK TO MY AGENT",
+    title: "Ask my representative agent",
+    intro:
+      "This panel is the live adk-agent backend, not a canned script. Ask it about the architecture or how I'd fit a role.",
+    inputPlaceholder: "Ask about a project, a decision, or a role…",
+    sendLabel: "Send",
+    presets: [
+      "Walk me through the Mediary Scout architecture.",
+      "Assess my fit for a senior backend role.",
+      "What reliability engineering have you done?",
+    ],
+    turnstilePrompt: "Quick human check before we start.",
+    streamError: "The stream dropped. Try again.",
+    retry: "Retry",
+    fallbackTitle: "Talk to my representative agent",
+    fallbackBody:
+      "The in-page panel is offline right now. The agent is still live on its own page.",
+    fallbackCta: "Open the agent →",
+    homeCta: "Or talk to my representative agent, live →",
+  },
   themeToggle: {
     toLight: "Light",
     toDark: "Dark",

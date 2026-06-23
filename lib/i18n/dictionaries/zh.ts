@@ -62,6 +62,26 @@ const zh: Dictionary = {
       { label: "Bilibili", href: "https://space.bilibili.com/5582337?spm_id_from=333.1007.0.0" },
     ],
   },
+  agent: {
+    eyebrow: "和我的 AGENT 对话",
+    title: "问我的代表 Agent",
+    intro:
+      "这个面板就是活的 adk-agent 后端，不是预设脚本。问它架构，或问它我适不适合某个岗位。",
+    inputPlaceholder: "问一个项目、一个决策，或一个岗位……",
+    sendLabel: "发送",
+    presets: [
+      "讲讲 Mediary Scout 的架构。",
+      "评估我对某个资深后端岗位的匹配度。",
+      "你做过哪些可靠性工程？",
+    ],
+    turnstilePrompt: "开始前先做个人机验证。",
+    streamError: "流式中断了，请重试。",
+    retry: "重试",
+    fallbackTitle: "和我的代表 Agent 对话",
+    fallbackBody: "站内面板暂时离线，Agent 在它自己的页面上仍然在线。",
+    fallbackCta: "打开 Agent →",
+    homeCta: "或者，和我的代表 Agent 实时对话 →",
+  },
   themeToggle: {
     toLight: "浅色",
     toDark: "深色",
