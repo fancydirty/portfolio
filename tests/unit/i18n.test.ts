@@ -14,4 +14,27 @@ describe("dictionaries", () => {
     expect(en.hero.line).toBeTruthy();
     expect(zh.hero.line).toBeTruthy();
   });
+
+  it("agent slice has 3 presets in both locales", async () => {
+    const en = await getDictionary("en");
+    const zh = await getDictionary("zh");
+    expect(en.agent.presets).toHaveLength(3);
+    expect(zh.agent.presets).toHaveLength(en.agent.presets.length);
+  });
+
+  it("agent presets leak no redline terms", async () => {
+    const en = await getDictionary("en");
+    const zh = await getDictionary("zh");
+    const redline = [
+      "blackwhitematch",
+      "bwwm",
+      "interracial",
+      "sogo",
+      "mailcow",
+      "successfulmatch",
+      "postiz",
+    ];
+    const blob = JSON.stringify([en.agent, zh.agent]).toLowerCase();
+    for (const term of redline) expect(blob).not.toContain(term);
+  });
 });

@@ -17,5 +17,13 @@ export default defineConfig({
     ],
     exclude: ["node_modules", ".next", ".reference", "docs", "e2e", "tests/e2e", ".superpowers", ".serena"],
   },
-  resolve: { alias: { "@": path.resolve(__dirname, ".") } },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "."),
+      // `server-only` throws unless resolved under the react-server condition,
+      // which the test runner doesn't set. Map it to a repo-owned no-op stub so
+      // resolution doesn't depend on the node_modules layout (pnpm/PnP-safe).
+      "server-only": path.resolve(__dirname, "tests/stubs/server-only.ts"),
+    },
+  },
 });
