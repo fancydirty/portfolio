@@ -12,6 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Local-only reference material and agent tooling (gitignored, not part of the app).
+    ".reference/**",
+    ".serena/**",
+    ".superpowers/**",
   ]),
 ]);
 
