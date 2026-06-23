@@ -29,9 +29,17 @@ export function AgentSection({ dict }: { dict: Dictionary }) {
         ) : availability === "unavailable" ? (
           <AgentFallback dict={dict} />
         ) : (
-          <p aria-hidden className="text-ink-subtle">
-            …
-          </p>
+          // "loading" only happens with JS, where the probe always resolves.
+          // Without JS the effect never runs, so render the fallback in
+          // <noscript> to guarantee the section is never a dead end.
+          <>
+            <p aria-hidden className="text-ink-subtle">
+              …
+            </p>
+            <noscript>
+              <AgentFallback dict={dict} />
+            </noscript>
+          </>
         )}
       </div>
     </section>

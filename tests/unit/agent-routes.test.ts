@@ -45,6 +45,20 @@ describe("GET /api/agent/me", () => {
     const res = await GET(new Request("http://localhost/api/agent/me"));
     expect(res.status).toBe(502);
   });
+
+  it("returns a controlled 503 when the gateway env is missing", async () => {
+    vi.stubEnv("GATEWAY_URL", "");
+    const { GET } = await import("@/app/api/agent/me/route");
+    const res = await GET(new Request("http://localhost/api/agent/me"));
+    expect(res.status).toBe(503);
+  });
+
+  it("returns a controlled 503 when the gateway fetch throws", async () => {
+    vi.spyOn(globalThis, "fetch").mockRejectedValue(new Error("ECONNREFUSED"));
+    const { GET } = await import("@/app/api/agent/me/route");
+    const res = await GET(new Request("http://localhost/api/agent/me"));
+    expect(res.status).toBe(503);
+  });
 });
 
 describe("POST /api/agent/chat", () => {

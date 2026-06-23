@@ -86,6 +86,21 @@ describe("createGatewayAdkStream", () => {
     await expect(collect(stream(HUMAN, runConfig()))).rejects.toThrow("rate limited");
   });
 
+  it("flushes a final frame that has no trailing blank line", async () => {
+    // No trailing \n\n on the last frame — must still be yielded.
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(
+        'data: {"id":"a","content":{"role":"model","parts":[{"text":"x"}]}}\n\n' +
+          'data: {"id":"b","content":{"role":"model","parts":[{"text":"y"}]}}',
+        { status: 200, headers: { "content-type": "text/event-stream" } },
+      ),
+    );
+    const stream = createGatewayAdkStream({ api: "/api/agent/chat" });
+    const events = await collect(stream(HUMAN, runConfig()));
+    expect(events).toHaveLength(2);
+    expect(events[1]!.content?.parts?.[0]?.text).toBe("y");
+  });
+
   it("calls onComplete after a clean stream", async () => {
     vi.spyOn(globalThis, "fetch").mockResolvedValue(
       sseResponse(['data: {"id":"a","content":{"role":"model","parts":[{"text":"x"}]}}']),

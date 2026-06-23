@@ -1,4 +1,9 @@
-import { gatewayHeaders, gatewayUrl } from "@/lib/agent/gateway";
+import {
+  gatewayHeaders,
+  gatewayUnavailable,
+  gatewayUrl,
+  relaySetCookies,
+} from "@/lib/agent/gateway";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -13,20 +18,25 @@ export async function POST(request: Request): Promise<Response> {
   const cookie = request.headers.get("cookie");
   if (cookie) headers.cookie = cookie;
 
-  const upstream = await fetch(`${gatewayUrl()}/api/chat`, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(body),
-  });
+  let upstream: Response;
+  try {
+    upstream = await fetch(`${gatewayUrl()}/api/chat`, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(body),
+    });
+  } catch {
+    // Misconfigured env or unreachable gateway — let the client degrade.
+    return gatewayUnavailable();
+  }
 
   const responseHeaders = new Headers({
     "Content-Type": upstream.headers.get("content-type") ?? "text/event-stream",
     "Cache-Control": "no-cache, no-store, no-transform",
     "X-Accel-Buffering": "no",
   });
-  const setCookie = upstream.headers.get("set-cookie");
+  relaySetCookies(upstream, responseHeaders);
   const streamId = upstream.headers.get("x-stream-id");
-  if (setCookie) responseHeaders.set("set-cookie", setCookie);
   if (streamId) responseHeaders.set("x-stream-id", streamId);
 
   return new Response(upstream.body, {

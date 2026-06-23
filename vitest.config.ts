@@ -17,5 +17,12 @@ export default defineConfig({
     ],
     exclude: ["node_modules", ".next", ".reference", "docs", "e2e", "tests/e2e", ".superpowers", ".serena"],
   },
-  resolve: { alias: { "@": path.resolve(__dirname, ".") } },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "."),
+      // `server-only` throws unless resolved under the react-server condition,
+      // which the test runner doesn't set. Map it to its own no-op build.
+      "server-only": path.resolve(__dirname, "node_modules/server-only/empty.js"),
+    },
+  },
 });

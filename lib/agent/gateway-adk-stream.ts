@@ -197,6 +197,12 @@ async function* parseSseResponse(
         boundary = buffer.indexOf("\n\n");
       }
     }
+
+    // Flush any trailing data: a final frame not terminated by a blank line
+    // (stream ended mid-boundary) would otherwise be dropped.
+    buffer += decoder.decode();
+    const tail = frameToEvent(buffer);
+    if (tail) yield tail;
   } finally {
     await reader.cancel().catch(() => undefined);
   }
