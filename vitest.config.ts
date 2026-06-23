@@ -21,8 +21,9 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "."),
       // `server-only` throws unless resolved under the react-server condition,
-      // which the test runner doesn't set. Map it to its own no-op build.
-      "server-only": path.resolve(__dirname, "node_modules/server-only/empty.js"),
+      // which the test runner doesn't set. Map it to a repo-owned no-op stub so
+      // resolution doesn't depend on the node_modules layout (pnpm/PnP-safe).
+      "server-only": path.resolve(__dirname, "tests/stubs/server-only.ts"),
     },
   },
 });

@@ -10,7 +10,16 @@ export const dynamic = "force-dynamic";
 export const maxDuration = 300;
 
 export async function POST(request: Request): Promise<Response> {
-  const body = await request.json();
+  let body: unknown;
+  try {
+    body = await request.json();
+  } catch {
+    // Internet-facing endpoint: fail closed on malformed JSON.
+    return new Response(JSON.stringify({ error: "invalid_json" }), {
+      status: 400,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
   const headers = gatewayHeaders({
     "Content-Type": "application/json",
     Accept: "text/event-stream",

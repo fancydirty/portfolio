@@ -91,4 +91,17 @@ describe("POST /api/agent/chat", () => {
     expect(res.headers.get("x-stream-id")).toBe("str_1");
     expect(res.headers.get("content-type")).toContain("text/event-stream");
   });
+
+  it("returns 400 on malformed JSON without calling the gateway", async () => {
+    const fetchMock = vi.spyOn(globalThis, "fetch");
+    const { POST } = await import("@/app/api/agent/chat/route");
+    const req = new Request("http://localhost/api/agent/chat", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: "{not valid json",
+    });
+    const res = await POST(req);
+    expect(res.status).toBe(400);
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
 });

@@ -114,6 +114,24 @@ describe("createGatewayAdkStream", () => {
     expect(events[0]!.content?.parts?.[0]?.text).toBe("crlf");
   });
 
+  it("does not flush a trailing frame once the signal is aborted", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(
+        'data: {"id":"a","content":{"role":"model","parts":[{"text":"x"}]}}',
+        { status: 200, headers: { "content-type": "text/event-stream" } },
+      ),
+    );
+    const controller = new AbortController();
+    controller.abort();
+    const config = {
+      abortSignal: controller.signal,
+      initialize: async () => ({ remoteId: "r", externalId: undefined }),
+    };
+    const stream = createGatewayAdkStream({ api: "/api/agent/chat" });
+    const events = await collect(stream(HUMAN, config));
+    expect(events).toHaveLength(0);
+  });
+
   it("calls onComplete after a clean stream", async () => {
     vi.spyOn(globalThis, "fetch").mockResolvedValue(
       sseResponse(['data: {"id":"a","content":{"role":"model","parts":[{"text":"x"}]}}']),
