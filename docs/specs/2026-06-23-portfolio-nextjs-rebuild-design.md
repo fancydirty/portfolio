@@ -114,7 +114,8 @@
 
 ## 6. 技术设计
 
-- **框架**：Next.js 16（App Router + Cache Components）+ React + **TypeScript strict**。内容为主 → 多数页面静态/SSG，加载快。
+- **框架**：Next.js 16（App Router）+ React + **TypeScript strict**。内容为主 → 多数页面静态/SSG，加载快。
+  - ⚠️ **Cache Components 当前禁用**（`next.config.ts` `cacheComponents:false`）：原计划开启以对齐旗舰、作简历信号，但 Next 16.2.9 有 bug——客户端导航时会重复上一路由的 `<main>`/`<h1>`。受控矩阵实验确认与布局结构无关，仅此 flag 触发。本站全静态（无 `"use cache"`/PPR-dynamic），禁用无功能损失。待 Next 修复后再启用。回归守卫：`tests/e2e/layout.spec.ts`。
 - **样式**：Tailwind + shadcn/ui + Geist。组件架构干净、TS strict 不滥用 any。
 - **国际化**：`[lang]` 段，EN + 中，轻量。
 - **内容模型**：项目数据迁成 TS 模块（沿用 `projects.ts` / `projects-zh.ts` 的 `Project` 类型，按 §2 纠正与扩充：新增 Mediary Scout 旗舰、删旧 clawd-media-track 卡、字段够承载五段式+指标+链路+多链接）。WorkDossier、架构图均为 React 组件。
