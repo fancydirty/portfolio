@@ -22,4 +22,9 @@ describe("SelectedWork (editorial index)", () => {
     expect(screen.getByText("精选作品")).toBeInTheDocument();
     expect(screen.getByText("Mediary Scout")).toBeInTheDocument();
   });
+  it("links each row to its case-study route", () => {
+    render(<SelectedWork projects={projects} lang="en" eyebrow="SELECTED WORK" />);
+    const link = screen.getByRole("link", { name: /Mediary Scout/i });
+    expect(link).toHaveAttribute("href", "/en/work/mediary-scout");
+  });
 });

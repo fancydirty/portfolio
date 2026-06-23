@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
 import type { Project } from "@/lib/content/projects";
 
@@ -35,8 +36,9 @@ export function SelectedWork({ projects, lang, eyebrow }: Props) {
             ...linkHints(project.links),
           ];
           return (
-            <article
+            <Link
               key={project.id}
+              href={`/${lang}/work/${project.id}`}
               className={`grid grid-cols-1 gap-x-6 gap-y-3 border-t border-hairline transition-[padding] hover:pl-2 md:grid-cols-[3rem_1fr_auto] ${
                 project.flagship ? "py-8 md:py-10" : "py-6"
               }`}
@@ -62,7 +64,7 @@ export function SelectedWork({ projects, lang, eyebrow }: Props) {
               <p className="font-mono text-xs text-ink-subtle md:text-right">
                 {meta.join(" · ")}
               </p>
-            </article>
+            </Link>
           );
         })}
       </div>
