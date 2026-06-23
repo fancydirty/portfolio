@@ -9,8 +9,13 @@ export default defineConfig({
     setupFiles: ["./vitest.setup.ts"],
     globals: true,
     passWithNoTests: true,
-    include: ["app/**/*.{test,spec}.{ts,tsx}", "lib/**/*.{test,spec}.{ts,tsx}"],
-    exclude: ["node_modules", ".next", ".reference", "docs", "e2e", "tests/e2e"],
+    include: [
+      "app/**/*.{test,spec}.{ts,tsx}",
+      "lib/**/*.{test,spec}.{ts,tsx}",
+      "components/**/*.{test,spec}.{ts,tsx}",
+      "tests/unit/**/*.{test,spec}.{ts,tsx}",
+    ],
+    exclude: ["node_modules", ".next", ".reference", "docs", "e2e", "tests/e2e", ".superpowers", ".serena"],
   },
   resolve: { alias: { "@": path.resolve(__dirname, ".") } },
 });
