@@ -559,13 +559,13 @@ git commit -m "feat(agent): availability probe hook"
 
 ---
 
-## Task 6: Streaming runtime adapter (port + strip recovery)
+## Task 6: Streaming runtime adapter (focused, from scratch)
 
 **Files:**
 - Create: `lib/agent/gateway-adk-stream.ts`
-- Reference: `.reference/adk-agent/frontend/lib/gateway-adk-stream.ts`
+- Reference: `.reference/adk-agent/frontend/lib/gateway-adk-stream.ts` (for body + SSE shapes only)
 
-This task ports proven code. The reference adapter is a large file; the slim version keeps **send + Turnstile retry + plain SSE parse** and removes the recovery/replay machinery.
+**Deviation from original plan:** rather than `cp` the heavy reference adapter (which carries recovery/replay/attachments) and strip it, write a focused ~120-line adapter from scratch against the real installed types (`@assistant-ui/react-google-adk` `AdkStreamCallback`/`AdkEvent`). The gateway SSE is plain `data: {AdkEvent json}\n\n`; the body for one human turn is `{ parts: [...] }`; Turnstile 403 is `{ error: "turnstile_required" }` and the token goes in the body as `turnstileToken`. Keeps **send + Turnstile retry + plain SSE parse**; no recovery/replay.
 
 - [ ] **Step 1: Copy the reference adapter into place**
 
