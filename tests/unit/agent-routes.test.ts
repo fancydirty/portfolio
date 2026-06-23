@@ -27,7 +27,7 @@ describe("GET /api/agent/me", () => {
     const res = await GET(req);
 
     expect(fetchMock).toHaveBeenCalledOnce();
-    const [calledUrl, init] = fetchMock.mock.calls[0];
+    const [calledUrl, init] = fetchMock.mock.calls[0]!;
     expect(calledUrl).toBe("https://api.example.test/api/me");
     expect((init as RequestInit).headers).toMatchObject({
       cookie: "sid=abc",
@@ -66,7 +66,7 @@ describe("POST /api/agent/chat", () => {
     });
     const res = await POST(req);
 
-    const [calledUrl, init] = fetchMock.mock.calls[0];
+    const [calledUrl, init] = fetchMock.mock.calls[0]!;
     expect(calledUrl).toBe("https://api.example.test/api/chat");
     expect((init as RequestInit).method).toBe("POST");
     expect((init as RequestInit).headers).toMatchObject({
