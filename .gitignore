@@ -30,3 +30,9 @@ screenshot-*.png
 .vercel
 .reference/
 .superpowers/
+.serena/
+.next/
+next-env.d.ts
+/coverage
+/test-results
+/playwright-report
