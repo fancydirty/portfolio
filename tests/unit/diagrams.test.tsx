@@ -23,7 +23,7 @@ describe("AnimatedDiagram", () => {
 });
 
 describe("ported diagrams", () => {
-  const BANNED = [/postiz/i, /blackwhitematch/i, /bwwm/i, /bwminsights/i, /interracial/i, /sogo/i, /mailcow/i, /successfulmatch/i, /88vip/i, /s\.utui/i];
+  const BANNED = [/postiz/i, /blackwhitematch/i, /bwwm/i, /bwminsights/i, /interracial/i, /sogo/i, /mailcow/i, /successfulmatch/i, /88vip/i, /s\.utui/i, /wechat/i, /code review/i];
   it("each diagram renders and leaks no banned term", () => {
     for (const D of [MediaryScoutDiagram, AdkAgentDiagram, EnterpriseFlowDiagram, ContentPipelineDiagram]) {
       const html = renderToStaticMarkup(<D />);
