@@ -32,7 +32,7 @@ export function AnimatedDiagram({ title, children, className }: AnimatedDiagramP
 
     // Normalize the draw length per flow path so the animation works regardless
     // of each path's actual geometry.
-    const paths = figure.querySelectorAll<SVGPathElement>("path[data-flow]");
+    const paths = figure.querySelectorAll<SVGPathElement>("path[data-flow]:not([data-no-draw])");
     for (const path of paths) {
       let len = 200;
       try {
@@ -70,7 +70,7 @@ export function AnimatedDiagram({ title, children, className }: AnimatedDiagramP
       className={className}
     >
       <style>{`
-        figure[data-animate="true"] path[data-flow] {
+        figure[data-animate="true"] path[data-flow]:not([data-no-draw]) {
           stroke-dasharray: var(--len, 200);
           stroke-dashoffset: var(--len, 200);
           animation: pf-draw 1.2s ease forwards;

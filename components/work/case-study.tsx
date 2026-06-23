@@ -92,9 +92,9 @@ export function CaseStudy({ project, lang, work }: Props) {
       <div className="mt-12">
         {SECTION_ORDER.map((key) => (
           <section key={key} className="border-t border-hairline py-10 first:border-t-0">
-            <p className="font-mono text-xs tracking-[0.18em] text-ink-subtle">
+            <h2 className="font-mono text-xs tracking-[0.18em] text-ink-subtle">
               {work.sections[key]}
-            </p>
+            </h2>
             <p className="mt-4 max-w-prose leading-relaxed text-ink-muted">{content[key]}</p>
           </section>
         ))}

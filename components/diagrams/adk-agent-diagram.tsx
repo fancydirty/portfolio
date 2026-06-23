@@ -104,10 +104,10 @@ export function AdkAgentDiagram() {
         <path data-flow d="M400 282 L675 282 L675 300" fill="none" stroke="var(--ink)" strokeWidth="1.2" />
         <polygon points="675,300 671,294 679,294" fill="var(--ink)" />
 
-        <path data-flow d="M665 124 L665 390 L300 390 L300 415" fill="none" stroke="var(--hairline)" strokeWidth="1.4" strokeDasharray="4,3" />
+        <path data-flow data-no-draw d="M665 124 L665 390 L300 390 L300 415" fill="none" stroke="var(--hairline)" strokeWidth="1.4" strokeDasharray="4,3" />
         <polygon points="300,415 296,409 304,409" fill="var(--hairline)" />
 
-        <path data-flow d="M665 124 L665 390 L520 390 L520 415" fill="none" stroke="var(--hairline)" strokeWidth="1.4" strokeDasharray="4,3" />
+        <path data-flow data-no-draw d="M665 124 L665 390 L520 390 L520 415" fill="none" stroke="var(--hairline)" strokeWidth="1.4" strokeDasharray="4,3" />
         <polygon points="520,415 516,409 524,409" fill="var(--hairline)" />
       </svg>
     </AnimatedDiagram>
