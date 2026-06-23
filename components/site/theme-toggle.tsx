@@ -1,15 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type Labels = { toLight: string; toDark: string };
 
 export function ThemeToggle({ labels }: { labels: Labels }) {
-  const [isLight, setIsLight] = useState(false);
-
-  useEffect(() => {
-    setIsLight(document.documentElement.classList.contains("light"));
-  }, []);
+  const [isLight, setIsLight] = useState(() =>
+    typeof document !== "undefined" &&
+    document.documentElement.classList.contains("light")
+  );
 
   function toggle() {
     const next = !isLight;
