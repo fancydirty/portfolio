@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
 import type { Project, FiveSection } from "@/lib/content/projects";
 import { diagramFor } from "@/components/diagrams/registry";
+import { DiagramZoom } from "@/components/diagrams/diagram-zoom";
 
 type WorkSlice = {
   backToWork: string;
@@ -87,7 +88,11 @@ export function CaseStudy({ project, lang, work }: Props) {
         </dl>
       ) : null}
 
-      {diagram ? <div className="mt-12">{diagram}</div> : null}
+      {diagram ? (
+        <div className="mt-12">
+          <DiagramZoom label={project.name}>{diagram}</DiagramZoom>
+        </div>
+      ) : null}
 
       <div className="mt-12">
         {SECTION_ORDER.map((key) => (
