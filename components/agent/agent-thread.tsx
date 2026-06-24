@@ -7,6 +7,8 @@ import {
 } from "@assistant-ui/react";
 import type { Dictionary } from "@/lib/i18n/dictionaries/en";
 import { MarkdownText } from "@/components/agent/markdown-text";
+import { AgentReasoning } from "@/components/agent/agent-reasoning";
+import { AgentToolFallback } from "@/components/agent/agent-tool";
 
 /**
  * A fixed-height chat window that reads, at a glance, as a live chat: a status
@@ -61,7 +63,13 @@ export function AgentThread({ dict }: { dict: Dictionary }) {
             ),
             AssistantMessage: () => (
               <MessagePrimitive.Root className="max-w-[88%] self-start rounded-xl rounded-bl-[3px] border border-hairline bg-surface-2 px-3.5 py-2.5 text-ink-muted">
-                <MessagePrimitive.Parts components={{ Text: MarkdownText }} />
+                <MessagePrimitive.Parts
+                  components={{
+                    Text: MarkdownText,
+                    Reasoning: AgentReasoning,
+                    tools: { Fallback: AgentToolFallback },
+                  }}
+                />
               </MessagePrimitive.Root>
             ),
           }}
