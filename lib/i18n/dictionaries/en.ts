@@ -6,9 +6,9 @@ const en = {
     links: "Links",
   },
   hero: {
-    line: "I build agent workflows that survive the edge between demo and product.",
-    sub: "Frameworks make the first agent cheap. My work starts where the demo stops: gateway boundaries, state, stream recovery, tool isolation, latency, deployment, and feedback from people who actually use it.",
-    status: "Focused on agent product engineering, not just agent prompts.",
+    line: "I build agents you don't have to babysit — they act on evidence, not vibes.",
+    sub: "My flagship, Mediary Scout, treats acquisition as a state problem: an agent searches real sources, transfers the best match into your own cloud drive, then re-reads to verify what actually landed — and a scheduler keeps closing the gaps. The discipline lives in software — workflow state, typed boundaries, snapshots, retries, audit logs — not in prompt wishful thinking.",
+    status: "Focused on agent product engineering: state machines, verification, and gateways — not just prompts.",
   },
   work: {
     eyebrow: "SELECTED WORK",
@@ -26,30 +26,30 @@ const en = {
     eyebrow: "HOW I WORK",
     items: [
       {
-        title: "Frameworks make demos cheap.",
-        body: "ADK can give you a stateful, tool-calling agent quickly. That is useful, but it is only the starting line. The harder work begins when the agent has to face unknown users, uploads, bad traffic, slow tools, and broken streams.",
+        title: "Express intent, don't supervise.",
+        body: "The user shouldn't babysit an agent. They say what they want, connect their account, and get results. The agent stays a strong, task-scoped actor inside a system-owned sandbox — not the product surface, and not a weak judgment API.",
+      },
+      {
+        title: "Acquisition is a state problem.",
+        body: "Most automation either searches well but never knows what you're still missing, or moves files but never checks what landed. I model it as state: season-level coverage, the gaps, and a scheduler that only comes back for what's still incomplete.",
+      },
+      {
+        title: "Act on evidence, then verify.",
+        body: "The agent reads real search results — picking by quality, subtitles, and dedup — transfers, then re-reads the drive to confirm what actually arrived. A fluent answer isn't enough; the system has to show what happened.",
+      },
+      {
+        title: "Move discipline from prompts into software.",
+        body: "Stop-before-side-effects, bind a plan, verify after — the right shape for a prompt-driven skill, but fragile. The product pushes those rules into workflow state, typed I/O, policy checks, retries, and audit logs.",
       },
       {
         title: "The gateway is part of the agent.",
-        body: "I do not want to expose an agent runtime directly to the internet. The business gateway owns anonymous sessions, file validation, abuse controls, resume delivery, streaming recovery, and the boundary between public traffic and private tools.",
-      },
-      {
-        title: "State should outlive refreshes and crashes.",
-        body: "If a user refreshes the page, or a long run stutters, the system should still know who they are and what already happened. This has held across media tracking, internal ops, content pipelines, and now web agents.",
-      },
-      {
-        title: "Latency is product behavior.",
-        body: "A slow first token changes whether the agent feels alive. Moving MCP startup out of the hot path and keeping tools warm mattered as much as prompt wording, because the user experiences the whole system, not just the model.",
-      },
-      {
-        title: "Evidence beats fluent answers.",
-        body: "The agent should answer from profile data, project records, uploaded context, and tool results. A polished response is not enough if the system cannot show where its judgment came from.",
+        body: "I don't expose an agent runtime to the internet. A business gateway owns anonymous sessions, abuse controls, streaming recovery, and the boundary between public traffic and private tools.",
       },
     ],
   },
   now: {
     eyebrow: "NOW",
-    body: "Right now I am using a recruiting representative agent as the test case. It has to speak with strangers, remember sessions, accept context, use my project evidence, and leave useful records for me to review later. The agent itself is no longer the only interesting part. The product boundary around it now matters just as much: gateway design, streaming behavior, abuse control, observability, and the small fixes that make a public agent feel steady instead of experimental.",
+    body: "The flagship right now is Mediary Scout — an agent that fills your own cloud-drive media library by acting on evidence and tracking what's still missing, with the discipline enforced in software rather than prompts. The agent you can talk to on this page is the same engineering on a different surface: a representative that answers recruiters from real project evidence. The interesting part is never just the model — it's the product boundary around it: state, verification, gateways, observability, and the small fixes that make a public agent feel steady instead of experimental.",
   },
   links: {
     eyebrow: "LINKS",
