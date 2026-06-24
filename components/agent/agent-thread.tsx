@@ -28,9 +28,9 @@ export function AgentThread({
   return (
     <ThreadPrimitive.Root className="flex h-[460px] flex-col overflow-hidden rounded-xl border border-hairline bg-surface-1">
       <div className="flex items-center gap-2 border-b border-hairline bg-surface-2 px-4 py-3">
-        <span className="agent-live-dot h-2 w-2 rounded-full bg-[#5DCAA5]" />
+        <span className="agent-live-dot h-2 w-2 rounded-full" />
         <span className="font-mono text-xs text-ink">adk-agent</span>
-        <span className="rounded border border-[#0F6E56] px-1.5 py-px font-mono text-[10px] tracking-wider text-[#5DCAA5]">
+        <span className="agent-live-badge rounded border px-1.5 py-px font-mono text-[10px] tracking-wider">
           LIVE
         </span>
         <span className="ml-auto font-mono text-[11px] text-ink-subtle">
@@ -81,7 +81,7 @@ export function AgentThread({
         <ThreadPrimitive.Messages
           components={{
             UserMessage: () => (
-              <MessagePrimitive.Root className="max-w-[82%] self-end whitespace-pre-wrap rounded-xl rounded-br-[3px] border border-[#5a4127] bg-[#3a2a18] px-3.5 py-2.5 text-[#f0d9bf]">
+              <MessagePrimitive.Root className="agent-you max-w-[82%] self-end whitespace-pre-wrap rounded-xl rounded-br-[3px] border px-3.5 py-2.5">
                 <MessagePrimitive.Parts />
               </MessagePrimitive.Root>
             ),
