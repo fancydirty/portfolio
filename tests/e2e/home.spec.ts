@@ -9,6 +9,22 @@ test("EN home shows positioning + editorial index, leaks nothing", async ({ page
     expect(body, `leaked ${term}`).not.toContain(term);
   }
 });
+test("EN home emits canonical, hreflang, and an OG image", async ({ page }) => {
+  await page.goto("/en");
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    "href",
+    /\/en$/,
+  );
+  await expect(
+    page.locator('link[rel="alternate"][hreflang="zh"]'),
+  ).toHaveAttribute("href", /\/zh$/);
+  const og = await page
+    .locator('meta[property="og:image"]')
+    .first()
+    .getAttribute("content");
+  expect(og, "og:image present").toBeTruthy();
+});
+
 test("zh locale renders", async ({ page }) => {
   await page.goto("/zh");
   await expect(page).toHaveURL(/\/zh/);
