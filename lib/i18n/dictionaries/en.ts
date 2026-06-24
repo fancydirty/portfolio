@@ -71,6 +71,8 @@ const en = {
     tryAsking: "TRY ASKING",
     userRole: "YOU",
     assistantRole: "AGENT",
+    newChat: "New",
+    compact: "Compact",
     presets: [
       "Walk me through the Mediary Scout architecture.",
       "Assess my fit for a senior backend role.",

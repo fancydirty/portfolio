@@ -73,6 +73,8 @@ const zh: Dictionary = {
     tryAsking: "试着问",
     userRole: "你",
     assistantRole: "AGENT",
+    newChat: "新会话",
+    compact: "压缩",
     presets: [
       "讲讲 Mediary Scout 的架构。",
       "评估我对某个资深后端岗位的匹配度。",
