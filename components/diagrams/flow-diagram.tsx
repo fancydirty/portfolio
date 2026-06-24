@@ -1,11 +1,22 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import type { FlowSpec, FlowNode } from "@/components/diagrams/diagrams-data";
 
 const MONO = "var(--font-mono), ui-monospace, monospace";
 const DEFAULT_W = 150;
 const DEFAULT_H = 54;
+
+const emptySubscribe = () => () => {};
+/** False during SSR / before hydration, true on the client — lint-clean. */
+function useHydrated(): boolean {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  );
+}
 
 function center(n: FlowNode) {
   return {
@@ -14,15 +25,63 @@ function center(n: FlowNode) {
   };
 }
 
+function NodeBody({ n }: { n: FlowNode }) {
+  const w = n.w ?? DEFAULT_W;
+  const h = n.h ?? DEFAULT_H;
+  const { cx, cy } = center(n);
+  return (
+    <>
+      <rect
+        x={n.x}
+        y={n.y}
+        width={w}
+        height={h}
+        rx={9}
+        fill={n.accent ? "#241a0e" : "#1a1a1d"}
+        stroke={n.accent ? "#e0a878" : "#232327"}
+        strokeWidth={1}
+      />
+      <text
+        x={cx}
+        y={n.sub ? cy - 3 : cy + 4}
+        textAnchor="middle"
+        style={{ fontFamily: MONO, fontSize: 12.5, fill: n.accent ? "#e0a878" : "#ededed" }}
+      >
+        {n.label}
+      </text>
+      {n.sub ? (
+        <text
+          x={cx}
+          y={cy + 14}
+          textAnchor="middle"
+          style={{ fontFamily: MONO, fontSize: 10, fill: "#6c6c72" }}
+        >
+          {n.sub}
+        </text>
+      ) : null}
+    </>
+  );
+}
+
 /**
  * Data-driven architecture diagram. Renders a refined node-and-edge flow from a
- * FlowSpec and animates it with Framer Motion: nodes stagger in along the flow
- * order as the diagram scrolls into view, and an accent pulse travels each edge
- * to show data moving through the pipeline. Honors prefers-reduced-motion by
- * rendering the full diagram statically with no pulses.
+ * FlowSpec and animates it with Framer Motion: once the diagram scrolls into
+ * view the nodes stagger in along the flow order, and an accent pulse travels
+ * each edge to show data moving through the pipeline.
+ *
+ * Robustness:
+ * - The stagger entrance plays once after hydration (not gated on viewport
+ *   detection, which proved flaky for large inline SVGs and could leave nodes
+ *   stuck hidden). The continuous pulse carries the "alive" feel while viewing.
+ * - Before hydration (SSR / no-JS) the nodes render statically visible, so the
+ *   diagram is never blank without JS. Motion takes over after mount.
+ * - prefers-reduced-motion → fully static, no pulses.
  */
 export function FlowDiagram({ spec }: { spec: FlowSpec }) {
   const reduce = useReducedMotion();
+  const mounted = useHydrated();
+
+  const motionOn = mounted && !reduce;
   const byId = new Map(spec.nodes.map((n) => [n.id, n]));
 
   return (
@@ -35,14 +94,7 @@ export function FlowDiagram({ spec }: { spec: FlowSpec }) {
       xmlns="http://www.w3.org/2000/svg"
       style={{ display: "block", maxWidth: "100%" }}
     >
-      <rect
-        x="0"
-        y="0"
-        width="100%"
-        height="100%"
-        fill="#141416"
-        rx="6"
-      />
+      <rect x="0" y="0" width="100%" height="100%" fill="#141416" rx="6" />
       <text
         x="50%"
         y="26"
@@ -70,7 +122,7 @@ export function FlowDiagram({ spec }: { spec: FlowSpec }) {
               strokeWidth={1}
               strokeDasharray={e.dashed ? "4 5" : undefined}
             />
-            {reduce ? null : (
+            {motionOn ? (
               <motion.circle
                 r={3.5}
                 fill="#e0a878"
@@ -80,62 +132,30 @@ export function FlowDiagram({ spec }: { spec: FlowSpec }) {
                   cy: [p1.cy, p2.cy],
                   opacity: [0, 1, 1, 0],
                 }}
-                transition={{
-                  duration: 2.6,
-                  repeat: Infinity,
-                  ease: "linear",
-                  delay: i * 0.25,
-                }}
+                transition={{ duration: 2.6, repeat: Infinity, ease: "linear", delay: i * 0.25 }}
               />
-            )}
+            ) : null}
           </g>
         );
       })}
 
-      {spec.nodes.map((n, i) => {
-        const w = n.w ?? DEFAULT_W;
-        const h = n.h ?? DEFAULT_H;
-        const { cx, cy } = center(n);
-        return (
-          <motion.g
-            key={n.id}
-            data-accent={String(!!n.accent)}
-            initial={reduce ? false : { opacity: 0, y: 8 }}
-            whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.4, delay: i * 0.07 }}
-          >
-            <rect
-              x={n.x}
-              y={n.y}
-              width={w}
-              height={h}
-              rx={9}
-              fill={n.accent ? "#241a0e" : "#1a1a1d"}
-              stroke={n.accent ? "#e0a878" : "#232327"}
-              strokeWidth={1}
-            />
-            <text
-              x={cx}
-              y={n.sub ? cy - 3 : cy + 4}
-              textAnchor="middle"
-              style={{ fontFamily: MONO, fontSize: 12.5, fill: n.accent ? "#e0a878" : "#ededed" }}
+      {motionOn
+        ? spec.nodes.map((n, i) => (
+            <motion.g
+              key={n.id}
+              data-accent={String(!!n.accent)}
+              initial={{ y: 9 }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.45, delay: i * 0.06, ease: "easeOut" }}
             >
-              {n.label}
-            </text>
-            {n.sub ? (
-              <text
-                x={cx}
-                y={cy + 14}
-                textAnchor="middle"
-                style={{ fontFamily: MONO, fontSize: 10, fill: "#6c6c72" }}
-              >
-                {n.sub}
-              </text>
-            ) : null}
-          </motion.g>
-        );
-      })}
+              <NodeBody n={n} />
+            </motion.g>
+          ))
+        : spec.nodes.map((n) => (
+            <g key={n.id} data-accent={String(!!n.accent)}>
+              <NodeBody n={n} />
+            </g>
+          ))}
     </svg>
   );
 }
