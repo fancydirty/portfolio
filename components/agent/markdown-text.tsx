@@ -3,10 +3,10 @@
 import { MarkdownTextPrimitive } from "@assistant-ui/react-markdown";
 
 /**
- * Minimal markdown renderer for assistant message text. Uses the assistant-ui
- * markdown primitive with no extra plugins to keep the bundle lean; inherits
- * prose styling from the surrounding editorial container.
+ * Markdown renderer for assistant message text. The `.agent-md` class supplies
+ * the prose styling (headings, lists, code) that Tailwind Preflight strips —
+ * see `app/globals.css`. No remark plugins, to keep the bundle lean.
  */
 export function MarkdownText() {
-  return <MarkdownTextPrimitive />;
+  return <MarkdownTextPrimitive className="agent-md" />;
 }
