@@ -69,6 +69,8 @@ const zh: Dictionary = {
       "这个面板就是活的 adk-agent 后端，不是预设脚本。问它架构，或问它我适不适合某个岗位。",
     inputPlaceholder: "问一个项目、一个决策，或一个岗位……",
     sendLabel: "发送",
+    headerNote: "我的代表",
+    tryAsking: "试着问",
     userRole: "你",
     assistantRole: "AGENT",
     presets: [
