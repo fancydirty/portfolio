@@ -6,6 +6,7 @@ import { useAdkRuntime } from "@assistant-ui/react-google-adk";
 import type { Dictionary } from "@/lib/i18n/dictionaries/en";
 import { createGatewayAdkStream } from "@/lib/agent/gateway-adk-stream";
 import { historyToAdkMessages } from "@/lib/agent/history";
+import { fetchMe } from "@/lib/agent/me";
 import {
   sendSlashCommand,
   type SlashCommand,
@@ -32,19 +33,12 @@ export function AgentPanel({ dict }: { dict: Dictionary }) {
       solveChallenge: () => solveTurnstile(),
     }),
     load: async () => {
-      try {
-        const res = await fetch("/api/agent/me", {
-          cache: "no-store",
-          credentials: "include",
-        });
-        if (!res.ok) return { messages: [] };
-        const data = await res.json();
-        return {
-          messages: historyToAdkMessages(data?.currentSession?.messages),
-        };
-      } catch {
-        return { messages: [] };
-      }
+      const r = await fetchMe();
+      if (!r.ok) return { messages: [] };
+      const data = r.data as {
+        currentSession?: { messages?: unknown };
+      } | null;
+      return { messages: historyToAdkMessages(data?.currentSession?.messages) };
     },
   });
 
