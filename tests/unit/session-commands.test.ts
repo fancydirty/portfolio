@@ -19,7 +19,7 @@ describe("sendSlashCommand", () => {
     const fetchMock = mockFetchOk();
     await sendSlashCommand("/new");
     expect(fetchMock).toHaveBeenCalledTimes(1);
-    const [url, init] = fetchMock.mock.calls[0];
+    const [url, init] = fetchMock.mock.calls[0]!;
     expect(url).toBe("/api/agent/chat");
     expect(init.method).toBe("POST");
     expect(init.credentials).toBe("include");
@@ -31,7 +31,7 @@ describe("sendSlashCommand", () => {
   it("sends /compact when asked", async () => {
     const fetchMock = mockFetchOk();
     await sendSlashCommand("/compact");
-    const init = fetchMock.mock.calls[0][1];
+    const init = fetchMock.mock.calls[0]![1];
     expect(JSON.parse(init.body as string)).toEqual({
       parts: [{ text: "/compact" }],
     });

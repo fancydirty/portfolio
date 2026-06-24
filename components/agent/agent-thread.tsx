@@ -16,7 +16,15 @@ import { AgentToolFallback } from "@/components/agent/agent-tool";
  * questions as clickable chips. Built on assistant-ui headless primitives;
  * assistant replies use the `.agent-md` prose styling.
  */
-export function AgentThread({ dict }: { dict: Dictionary }) {
+export function AgentThread({
+  dict,
+  onNewSession,
+  onCompact,
+}: {
+  dict: Dictionary;
+  onNewSession: () => void;
+  onCompact: () => void;
+}) {
   return (
     <ThreadPrimitive.Root className="flex h-[460px] flex-col overflow-hidden rounded-xl border border-hairline bg-surface-1">
       <div className="flex items-center gap-2 border-b border-hairline bg-surface-2 px-4 py-3">
@@ -28,6 +36,22 @@ export function AgentThread({ dict }: { dict: Dictionary }) {
         <span className="ml-auto font-mono text-[11px] text-ink-subtle">
           {dict.agent.headerNote}
         </span>
+        <div className="flex items-center gap-1.5">
+          <button
+            type="button"
+            onClick={onNewSession}
+            className="rounded border border-hairline px-2 py-0.5 font-mono text-[11px] text-ink-subtle transition-colors hover:border-accent hover:text-ink"
+          >
+            {dict.agent.newChat}
+          </button>
+          <button
+            type="button"
+            onClick={onCompact}
+            className="rounded border border-hairline px-2 py-0.5 font-mono text-[11px] text-ink-subtle transition-colors hover:border-accent hover:text-ink"
+          >
+            {dict.agent.compact}
+          </button>
+        </div>
       </div>
 
       <ThreadPrimitive.Viewport className="scroll-thin flex flex-1 flex-col gap-3 overflow-y-auto px-4 py-4">
