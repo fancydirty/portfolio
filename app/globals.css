@@ -5,11 +5,17 @@
   --hairline: #232327;      --ink: #ededed;           --ink-muted: #a0a0a6;
   --ink-subtle: #6c6c72;    --accent: #e0a878;        /* restrained signature; tunable */
   --on-accent: #1a1206;
+  --agent-live: #5DCAA5; --agent-live-strong: #0F6E56;
+  --agent-ok: #5DCAA5; --agent-fail: #E24B4A;
+  --agent-you-bg: #3a2a18; --agent-you-fg: #f0d9bf; --agent-you-border: #5a4127;
 }
 .light {
   --canvas: #faf9f7; --surface-1: #ffffff; --surface-2: #f3f1ec;
   --hairline: #e4e1da; --ink: #18181a; --ink-muted: #55555c; --ink-subtle: #8a8a90;
   --accent: #b4632c; --on-accent: #ffffff;
+  --agent-live: #2e8d6f; --agent-live-strong: #1f6b54;
+  --agent-ok: #1f8a5b; --agent-fail: #c0392b;
+  --agent-you-bg: #f4e7d3; --agent-you-fg: #5a3f1e; --agent-you-border: #d9c39a;
 }
 @theme inline {
   --color-canvas: var(--canvas); --color-surface-1: var(--surface-1);
@@ -78,16 +84,32 @@ body {
 .agent-md th, .agent-md td { border: 1px solid var(--hairline); padding: 0.4em 0.7em; text-align: left; }
 .agent-md th { color: var(--ink); font-weight: 600; }
 
+/* Agent chat accents, driven by tokens so light mode flips them. */
+.agent-tool-ok { color: var(--agent-ok); }
+.agent-tool-fail { color: var(--agent-fail); }
+.agent-tool-run { color: var(--accent); }
+.agent-you {
+  border-color: var(--agent-you-border);
+  background: var(--agent-you-bg);
+  color: var(--agent-you-fg);
+}
+.agent-live-badge {
+  border-color: var(--agent-live-strong);
+  color: var(--agent-live);
+}
+
 /* Live status dot on the chat header. Reduced-motion is disabled by the media
-   query above. */
+   query above. The pulse uses color-mix so it tracks --agent-live in both
+   themes instead of a hardcoded rgba. */
 .agent-live-dot {
-  box-shadow: 0 0 0 0 rgba(93, 202, 165, 0.5);
+  background: var(--agent-live);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--agent-live) 50%, transparent);
   animation: agent-pulse 2s infinite;
 }
 @keyframes agent-pulse {
-  0% { box-shadow: 0 0 0 0 rgba(93, 202, 165, 0.5); }
-  70% { box-shadow: 0 0 0 6px rgba(93, 202, 165, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(93, 202, 165, 0); }
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--agent-live) 50%, transparent); }
+  70% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--agent-live) 0%, transparent); }
+  100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--agent-live) 0%, transparent); }
 }
 
 /* Thin dark scrollbar for scroll regions (chat viewport, diagram lightbox). */

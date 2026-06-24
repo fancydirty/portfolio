@@ -31,3 +31,26 @@ test("tool chip shows a check on completion", () => {
   expect(screen.getByText("read_file")).toBeInTheDocument();
   expect(screen.getByText("✓")).toBeInTheDocument();
 });
+
+test("tool chip status uses a theme-aware class, not an inline color", () => {
+  const complete = {
+    toolName: "read_file",
+    status: { type: "complete" },
+  } as unknown as ComponentProps<typeof AgentToolFallback>;
+  render(<AgentToolFallback {...complete} />);
+  expect(screen.getByText("✓")).toHaveClass("agent-tool-ok");
+
+  const failed = {
+    toolName: "search",
+    status: { type: "incomplete" },
+  } as unknown as ComponentProps<typeof AgentToolFallback>;
+  render(<AgentToolFallback {...failed} />);
+  expect(screen.getByText(/failed/i)).toHaveClass("agent-tool-fail");
+
+  const running = {
+    toolName: "search",
+    status: { type: "running" },
+  } as unknown as ComponentProps<typeof AgentToolFallback>;
+  render(<AgentToolFallback {...running} />);
+  expect(screen.getByText(/running/i)).toHaveClass("agent-tool-run");
+});

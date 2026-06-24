@@ -1,8 +1,12 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { renderHook, waitFor } from "@testing-library/react";
 import { useAgentAvailability } from "@/lib/agent/use-agent-availability";
+import { __resetMeCacheForTests } from "@/lib/agent/me";
 
-afterEach(() => vi.restoreAllMocks());
+afterEach(() => {
+  vi.restoreAllMocks();
+  __resetMeCacheForTests();
+});
 
 describe("useAgentAvailability", () => {
   it("reports available when /api/agent/me is ok", async () => {

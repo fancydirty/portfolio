@@ -20,10 +20,18 @@ test("shows the home section anchors on the home page", () => {
 test("hides the dead section anchors on a detail page, keeps logo + lang", () => {
   mockPathname.mockReturnValue("/en/work/adk-agent");
   render(<SiteNav lang="en" nav={enDict.nav} themeToggle={enDict.themeToggle} />);
-  // No #now / #work etc. anchors that would do nothing on a detail page.
   expect(screen.queryByRole("link", { name: enDict.nav.now })).toBeNull();
   expect(screen.queryByRole("link", { name: enDict.nav.work })).toBeNull();
-  // Brand (→ home) and language switch remain.
   expect(screen.getByRole("link", { name: /Zhou Le/ })).toBeInTheDocument();
-  expect(screen.getByRole("link", { name: "中" })).toHaveAttribute("href", "/zh");
+  // Lang switch keeps the detail path, not just the locale root.
+  expect(screen.getByRole("link", { name: "中" })).toHaveAttribute(
+    "href",
+    "/zh/work/adk-agent",
+  );
+});
+
+test("lang switch on home points at the other locale root", () => {
+  mockPathname.mockReturnValue("/zh");
+  render(<SiteNav lang="zh" nav={enDict.nav} themeToggle={enDict.themeToggle} />);
+  expect(screen.getByRole("link", { name: "EN" })).toHaveAttribute("href", "/en");
 });

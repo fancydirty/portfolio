@@ -49,3 +49,13 @@ test("root honors Accept-Language (zh → /zh, en → /en)", async ({ browser })
   await expect(enPage).toHaveURL(/\/en$/);
   await enCtx.close();
 });
+
+test("emits a Person JSON-LD script", async ({ page }) => {
+  await page.goto("/en");
+  const el = page.locator('script[type="application/ld+json"]').first();
+  await expect(el).toBeAttached();
+  const raw = await el.textContent();
+  const obj = JSON.parse(raw ?? "{}");
+  expect(obj["@type"]).toBe("Person");
+  expect(obj.name).toBe("Zhou Le");
+});

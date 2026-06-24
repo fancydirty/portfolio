@@ -5,6 +5,8 @@ import { GeistMono } from "geist/font/mono";
 import { locales, isLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { buildAlternates } from "@/lib/seo/site";
+import { personJsonLd } from "@/lib/seo/jsonld";
+import { JsonLdScript } from "@/components/site/jsonld-script";
 import { SiteNav } from "@/components/site/site-nav";
 import { SiteFooter } from "@/components/site/site-footer";
 
@@ -46,6 +48,7 @@ export default async function LangLayout({
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
   const dict = await getDictionary(lang);
+  const sameAs = [dict.links.github, ...dict.links.items.map((i) => i.href)];
 
   return (
     <html lang={lang} suppressHydrationWarning className={`${GeistSans.variable} ${GeistMono.variable}`}>
@@ -56,6 +59,7 @@ export default async function LangLayout({
               "try{if(localStorage.theme==='light')document.documentElement.classList.add('light')}catch(e){}",
           }}
         />
+        <JsonLdScript data={personJsonLd({ sameAs })} />
       </head>
       <body>
         <SiteNav lang={lang} nav={dict.nav} themeToggle={dict.themeToggle} />

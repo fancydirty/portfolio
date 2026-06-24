@@ -15,6 +15,9 @@ type Props = {
 export function SiteNav({ lang, nav, themeToggle }: Props) {
   const other: Locale = lang === "en" ? "zh" : "en";
   const pathname = usePathname();
+  // Preserve everything after the locale segment when switching languages, so
+  // a case-study reader keeps their place rather than landing on the locale root.
+  const otherHref = pathname.replace(/^\/(en|zh)(?=\/|$)/, `/${other}`);
   // The section anchors point at home-page sections (#work/#how/#now/#links),
   // so they only resolve on the home page itself. On any deeper route (case
   // studies) they would be dead clicks — show them only at home.
@@ -48,7 +51,7 @@ export function SiteNav({ lang, nav, themeToggle }: Props) {
         ) : null}
         <div className="flex items-center gap-4">
           <Link
-            href={`/${other}`}
+            href={otherHref}
             className="font-mono text-xs uppercase tracking-wide text-ink-muted transition-colors hover:text-ink"
           >
             {other === "zh" ? "中" : "EN"}
