@@ -72,7 +72,7 @@ export function DiagramZoom({
           </button>
           <div
             onClick={(e) => e.stopPropagation()}
-            className="max-h-full w-full max-w-5xl overflow-auto"
+            className="scroll-thin max-h-full w-full max-w-5xl overflow-auto"
           >
             {children}
           </div>

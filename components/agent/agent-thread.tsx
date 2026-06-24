@@ -28,7 +28,7 @@ export function AgentThread({ dict }: { dict: Dictionary }) {
         </span>
       </div>
 
-      <ThreadPrimitive.Viewport className="flex flex-1 flex-col gap-3 overflow-y-auto px-4 py-4">
+      <ThreadPrimitive.Viewport className="scroll-thin flex flex-1 flex-col gap-3 overflow-y-auto px-4 py-4">
         <ThreadPrimitive.Empty>
           <div className="max-w-[85%] self-start rounded-xl rounded-bl-[3px] border border-hairline bg-surface-2 px-3.5 py-2.5 leading-relaxed text-ink-muted">
             {dict.agent.intro}

@@ -104,7 +104,7 @@ export function FlowDiagram({ spec }: { spec: FlowSpec }) {
         {spec.title}
       </text>
 
-      {spec.edges.map((e, i) => {
+      {spec.edges.map((e) => {
         const a = byId.get(e.from);
         const b = byId.get(e.to);
         if (!a || !b) return null;
@@ -122,19 +122,18 @@ export function FlowDiagram({ spec }: { spec: FlowSpec }) {
               strokeWidth={1}
               strokeDasharray={e.dashed ? "4 5" : undefined}
             />
-            {motionOn ? (
-              <motion.circle
-                r={3.5}
-                fill="#e0a878"
-                initial={{ cx: p1.cx, cy: p1.cy, opacity: 0 }}
-                animate={{
-                  cx: [p1.cx, p2.cx],
-                  cy: [p1.cy, p2.cy],
-                  opacity: [0, 1, 1, 0],
-                }}
-                transition={{ duration: 2.6, repeat: Infinity, ease: "linear", delay: i * 0.25 }}
-              />
-            ) : null}
+            <line
+              x1={p1.cx}
+              y1={p1.cy}
+              x2={p2.cx}
+              y2={p2.cy}
+              stroke="#e0a878"
+              strokeWidth={1.4}
+              strokeLinecap="round"
+              strokeDasharray={e.dashed ? "3 13" : "7 11"}
+              opacity={0.9}
+              className="flow-edge"
+            />
           </g>
         );
       })}
