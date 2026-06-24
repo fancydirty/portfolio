@@ -1,38 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# portfolio
 
-## Getting Started
+The personal portfolio and live representative agent of **Zhou Le (周乐)** — a bilingual (English / 中文), editorially-composed site that doubles as a working agent product, not a static résumé.
 
-First, run the development server:
+**Live:** https://portfolio.dirtyfancy.sbs
+
+## What's here
+
+- **Editorial home + case studies.** A typographic, anti-template layout for selected work — flagship *Mediary Scout* (an agent-driven, self-hosted media library for your own cloud drives) plus three further projects, each told as a five-part case study.
+- **An in-page representative agent.** A live chat panel (assistant-ui over a same-origin proxy to a separate agent gateway) that answers questions about the work using real project evidence, with session persistence and graceful degradation when the gateway is offline.
+- **Architecture diagrams.** Data-driven flow diagrams rendered from a single primitive.
+
+## Stack
+
+- **Next.js 16** App Router, React 19, React Server Components, TypeScript (strict).
+- **Tailwind v4** (CSS-first `@theme`), Geist fonts.
+- **i18n** via a `[lang]` segment + plain dictionary modules (en source, zh mirror), with an Accept-Language redirect.
+- **Agent UI** with `@assistant-ui/react` + the Google ADK runtime, talking to a gateway through a same-origin proxy.
+- **Dynamic OG images** via `next/og`, sitemap/robots via Next file conventions.
+- Deployed on **Vercel**.
+
+## Local development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev          # http://localhost:3000 (redirects to /en or /zh)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The in-page agent needs gateway env vars (`GATEWAY_URL`, `GATEWAY_PROXY_SECRET`, `NEXT_PUBLIC_TURNSTILE_SITE_KEY`); without them the site renders fully and the agent panel degrades to a link.
 
-Routes live under `app/[lang]/`: the bilingual home is `app/[lang]/page.tsx` and case studies are `app/[lang]/work/[slug]/page.tsx`. The root `app/page.tsx` only redirects to a locale (locale selection by `Accept-Language` is handled in `proxy.ts`). The page auto-updates as you edit.
+## Checks
 
-> A fuller project README (architecture, content model, deploy) lands in a later phase.
+```bash
+npm run build                       # production build
+npx tsc --noEmit && npx vitest run  # types + unit tests
+npm run test:e2e                    # Playwright end-to-end
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## License
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+All rights reserved. Code is published for portfolio review, not for reuse.
