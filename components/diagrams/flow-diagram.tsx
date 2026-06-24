@@ -37,15 +37,23 @@ function NodeBody({ n }: { n: FlowNode }) {
         width={w}
         height={h}
         rx={9}
-        fill={n.accent ? "#241a0e" : "#1a1a1d"}
-        stroke={n.accent ? "#e0a878" : "#232327"}
         strokeWidth={1}
+        style={{
+          fill: n.accent
+            ? "color-mix(in srgb, var(--accent) 14%, var(--surface-2))"
+            : "var(--surface-2)",
+          stroke: n.accent ? "var(--accent)" : "var(--hairline)",
+        }}
       />
       <text
         x={cx}
         y={n.sub ? cy - 3 : cy + 4}
         textAnchor="middle"
-        style={{ fontFamily: MONO, fontSize: 12.5, fill: n.accent ? "#e0a878" : "#ededed" }}
+        style={{
+          fontFamily: MONO,
+          fontSize: 12.5,
+          fill: n.accent ? "var(--accent)" : "var(--ink)",
+        }}
       >
         {n.label}
       </text>
@@ -54,7 +62,7 @@ function NodeBody({ n }: { n: FlowNode }) {
           x={cx}
           y={cy + 14}
           textAnchor="middle"
-          style={{ fontFamily: MONO, fontSize: 10, fill: "#6c6c72" }}
+          style={{ fontFamily: MONO, fontSize: 10, fill: "var(--ink-subtle)" }}
         >
           {n.sub}
         </text>
@@ -94,12 +102,20 @@ export function FlowDiagram({ spec }: { spec: FlowSpec }) {
       xmlns="http://www.w3.org/2000/svg"
       style={{ display: "block", maxWidth: "100%" }}
     >
-      <rect x="0" y="0" width="100%" height="100%" fill="#141416" rx="6" />
+      <rect
+        x="0"
+        y="0"
+        width="100%"
+        height="100%"
+        rx="6"
+        strokeWidth={1}
+        style={{ fill: "var(--surface-1)", stroke: "var(--hairline)" }}
+      />
       <text
         x="50%"
         y="26"
         textAnchor="middle"
-        style={{ fontFamily: MONO, fontSize: 12, fill: "#e0a878", letterSpacing: "0.04em" }}
+        style={{ fontFamily: MONO, fontSize: 12, fill: "var(--accent)", letterSpacing: "0.04em" }}
       >
         {spec.title}
       </text>
@@ -118,21 +134,21 @@ export function FlowDiagram({ spec }: { spec: FlowSpec }) {
               y1={p1.cy}
               x2={p2.cx}
               y2={p2.cy}
-              stroke="#232327"
               strokeWidth={1}
               strokeDasharray={e.dashed ? "4 5" : undefined}
+              style={{ stroke: "var(--hairline)" }}
             />
             <line
               x1={p1.cx}
               y1={p1.cy}
               x2={p2.cx}
               y2={p2.cy}
-              stroke="#e0a878"
               strokeWidth={1.4}
               strokeLinecap="round"
               strokeDasharray={e.dashed ? "3 13" : "7 11"}
               opacity={0.9}
               className="flow-edge"
+              style={{ stroke: "var(--accent)" }}
             />
           </g>
         );

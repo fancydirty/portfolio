@@ -27,3 +27,17 @@ test("flags exactly the accent (signature) node", () => {
   expect(root.querySelectorAll("[data-accent='true']").length).toBe(1);
   expect(root.querySelectorAll("[data-accent='false']").length).toBe(1);
 });
+
+test("colors come from theme tokens, not dark-only hex (so light mode flips)", () => {
+  render(<FlowDiagram spec={spec} />);
+  const root = screen.getByRole("img", { name: /demo flow/i });
+  const markup = root.outerHTML;
+  // The dark-theme hex literals must not be baked in — they can't follow .light.
+  for (const darkHex of ["#141416", "#1a1a1d", "#232327", "#ededed", "#6c6c72"]) {
+    expect(markup, `hardcoded ${darkHex}`).not.toContain(darkHex);
+  }
+  // Theme variables must drive the chrome instead.
+  for (const token of ["var(--surface-1)", "var(--surface-2)", "var(--hairline)", "var(--ink)"]) {
+    expect(markup, `missing ${token}`).toContain(token);
+  }
+});
