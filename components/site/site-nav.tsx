@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionaries/en";
 import { ThemeToggle } from "./theme-toggle";
@@ -11,6 +14,11 @@ type Props = {
 
 export function SiteNav({ lang, nav, themeToggle }: Props) {
   const other: Locale = lang === "en" ? "zh" : "en";
+  const pathname = usePathname();
+  // The section anchors point at home-page sections (#work/#how/#now/#links),
+  // so they only resolve on the home page itself. On any deeper route (case
+  // studies) they would be dead clicks — show them only at home.
+  const onHome = pathname === `/${lang}`;
   const sections: { href: string; label: string }[] = [
     { href: "#work", label: nav.work },
     { href: "#how", label: nav.howIWork },
@@ -24,18 +32,20 @@ export function SiteNav({ lang, nav, themeToggle }: Props) {
         <Link href={`/${lang}`} className="text-sm font-semibold text-ink">
           周乐 · Zhou Le
         </Link>
-        <ul className="hidden items-center gap-5 sm:flex">
-          {sections.map((s) => (
-            <li key={s.href}>
-              <a
-                href={s.href}
-                className="font-mono text-xs uppercase tracking-wide text-ink-muted transition-colors hover:text-ink"
-              >
-                {s.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+        {onHome ? (
+          <ul className="hidden items-center gap-5 sm:flex">
+            {sections.map((s) => (
+              <li key={s.href}>
+                <a
+                  href={s.href}
+                  className="font-mono text-xs uppercase tracking-wide text-ink-muted transition-colors hover:text-ink"
+                >
+                  {s.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        ) : null}
         <div className="flex items-center gap-4">
           <Link
             href={`/${other}`}
