@@ -88,6 +88,11 @@ const zh: Dictionary = {
     fallbackCta: "打开 Agent →",
     homeCta: "或者，和我的代表 Agent 实时对话 →",
   },
+  seo: {
+    homeTitle: "周乐 — Agent 产品工程",
+    homeDescription:
+      "我做不用你盯着的 agent——它凭证据行动，而不是凭感觉。旗舰 Mediary Scout：agent 驱动的自部署媒体库。",
+  },
   themeToggle: {
     toLight: "浅色",
     toDark: "深色",

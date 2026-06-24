@@ -87,6 +87,11 @@ const en = {
     fallbackCta: "Open the agent →",
     homeCta: "Or talk to my representative agent, live →",
   },
+  seo: {
+    homeTitle: "Zhou Le — Agent Product Engineering",
+    homeDescription:
+      "I build agents you don't have to babysit — they act on evidence, not vibes. Flagship: Mediary Scout, an agent-driven self-hosted media library.",
+  },
   themeToggle: {
     toLight: "Light",
     toDark: "Dark",
